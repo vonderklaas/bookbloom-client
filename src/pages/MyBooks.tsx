@@ -100,7 +100,7 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
 
     return (
         <div className='content'>
-            <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} setIsAddMode={setIsAddMode} selectedBook={selectedBook}/>
+            <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} setIsAddMode={setIsAddMode} selectedBook={selectedBook} isWishlist={isWishlist}/>
             {modalIsOpen && (
                 <Modal
                     isOpen={modalIsOpen}

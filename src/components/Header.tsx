@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 export const Header = () => {
 
+    const location = useLocation();
     const navigate = useNavigate();
     const { user, setUser } = useUser();
 
@@ -29,21 +30,23 @@ export const Header = () => {
         navigate('/')
     }
 
+    const isActive = (path: string) => location.pathname.includes(path);
+
     return (
         <header className="header">
             <Link to={`/`}>
                 <h2>bookbloom</h2>
             </Link>
             <>
-                {!user && (
+                {!user ? (
                     <nav style={{ display: 'flex', gap: '2rem' }}>
-                        <Link to={`login`}>Login</Link>
-                        <Link to={`register`}>Register</Link>
-                    </nav>)}
-                {user && (
-                    <nav>
-                        <Link to={`wishlist`}>Wishlist</Link>
-                        <Link to={`books`}>My books</Link>
+                        <Link to={`login`} className={isActive('login') ? 'active' : ''}>Login</Link>
+                        <Link to={`register`} className={isActive('register') ? 'active' : ''}>Register</Link>
+                    </nav>
+                ) : (
+                    <nav style={{ display: 'flex', gap: '2rem' }}>
+                        <Link to={`wishlist`} className={isActive('wishlist') ? 'active' : ''}>Wishlist</Link>
+                        <Link to={`books`} className={isActive('books') ? 'active' : ''}>My books</Link>
                         <a href='' onClick={logout}>
                             Logout
                         </a>

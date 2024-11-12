@@ -4,7 +4,7 @@ import { Book } from "../types";
 import BookCard from "./Book";
 
 type ListOfBooksProps = {
-    wishlist?: boolean; // New prop to indicate if we’re fetching wishlist books
+    isWishlist?: boolean; // New prop to indicate if we’re fetching wishlist books
     books: Book[]
     isProcessing: boolean;
     openModal: (book?: Book) => void;
@@ -12,7 +12,7 @@ type ListOfBooksProps = {
     selectedBook: Book | null;
 }
 
-export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, selectedBook }: ListOfBooksProps) => {
+export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, selectedBook, isWishlist }: ListOfBooksProps) => {
 
     const { user } = useUser();
 
@@ -26,7 +26,7 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, sele
     return (
         <>
             {user?.id && books.length >= 1 && (
-                <button onClick={handleAddBook}>Add a book 📚</button>
+                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish 📚' : 'Add a book 📚'}</button>
             )}
             <div className='books'>
                 {!isProcessing ? (
@@ -35,7 +35,7 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, sele
                             <>
                                 {books.map((book) => (
                                     <div key={book.id}>
-                                        <BookCard book={book} openModal={openModal} selectedBook={selectedBook} />
+                                        <BookCard book={book} openModal={openModal} selectedBook={selectedBook} isWishlist={isWishlist} />
                                     </div>
                                 ))}
                             </>

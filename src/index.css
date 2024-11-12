@@ -1,6 +1,7 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
+    font-size: 1.1rem;
     font-weight: 400;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
@@ -18,13 +19,11 @@ a {
 }
 
 a:hover {
-    color: #535bf2;
+    color: orange;
 }
 
 body {
     margin: 0;
-    /* display: flex; */
-    /* place-items: center; */
 }
 
 h1 {
@@ -33,7 +32,7 @@ h1 {
 }
 
 button {
-    border-radius: 8px;
+    border-radius: 0.5rem;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
     font-size: 1em;
@@ -45,7 +44,7 @@ button {
 }
 
 button:hover {
-    border-color: #646cff;
+    border-color: orange;
 }
 
 button:focus,
@@ -60,7 +59,7 @@ button:focus-visible {
     }
 
     a:hover {
-        color: #747bff;
+        color: orange;
     }
 
     button {
@@ -90,7 +89,7 @@ button:focus-visible {
     margin-top: 2rem;
 }
 
-.book {
+.book-card {
     background-color: transparent;
     border: 0.2rem solid #747bff;
     padding: 1rem;
@@ -105,8 +104,33 @@ button:focus-visible {
     }
 }
 
+.book-card-wish {
+    background-color: transparent;
+    border: 0.2rem solid pink;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 12rem;
+    height: 17rem;
+    cursor: pointer;
+    transition: all .15s;
+
+    &:hover {
+        background-color: pink;
+        color: #000;
+    }
+}
+
 .active-book {
     background-color: #747bff;
+}
+
+.active-book-wishlist {
+    background-color: pink;
+    color: #000;
+}
+
+.active {
+    color: orange
 }
 
 .header {
@@ -118,7 +142,7 @@ button:focus-visible {
 }
 
 .header h2 {
-    color: darkkhaki
+    color: #747bff
 }
 
 .header nav {
@@ -135,6 +159,11 @@ button:focus-visible {
     display: flex;
     align-content: center;
     justify-content: center;
+    border-radius: 0.5rem;
+    padding: 1rem 0.5rem 1.6rem 0;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.60) !important;
+    box-shadow: 2px 4px 30px #747bff;
 }
 
 .register-wrapper {
@@ -142,6 +171,11 @@ button:focus-visible {
     display: flex;
     align-content: center;
     justify-content: center;
+    border-radius: 0.5rem;
+    padding: 1rem 0.5rem 1.6rem 0;
+    max-width: 300px;
+    background-color: rgba(0, 0, 0, 0.60) !important;
+    box-shadow: 2px 4px 30px #747bff;
 }
 
 input {

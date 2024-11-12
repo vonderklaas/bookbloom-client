@@ -35,17 +35,17 @@ export const Home = () => {
     return (
         <div className="home">
             <h1>
-                Welcome, <span style={{ color: "orangered" }}>{user?.id ? user?.username : 'wanderer'}</span>!
+                Welcome, <span style={{ color: "orange" }}>{user?.id ? user?.username : 'wanderer'}</span>!
             </h1>
             <p>Manage your personal book collection and keep track of your favorite reads.</p>
             <br />
             <div className="stats">
                 <h2>Currently tracking</h2>
                 {totalReaders ? (
-                    <h3><span style={{ color: "orangered" }}>{totalReaders ?? "..."} readers</span></h3>
+                    <h3><span style={{ color: "orange" }}>{totalReaders ?? "..."} readers</span></h3>
                 ) : <h3>...</h3>}
                 {totalBooks ? (
-                    <h3><span style={{ color: "orangered" }}>{totalBooks ?? "..."} books</span></h3>
+                    <h3><span style={{ color: "orange" }}>{totalBooks ?? "..."} books</span></h3>
                 ) : <h3>...</h3>}
             </div>
         </div>

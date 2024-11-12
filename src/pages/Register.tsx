@@ -105,6 +105,8 @@ const Register = () => {
                     </label>
                     <br/>
                     <button type='submit'>Register</button>
+                    <br/>
+                    <br/>
                 </form>
             </div>
         </div>

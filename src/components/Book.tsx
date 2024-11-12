@@ -4,13 +4,20 @@ type BookCardProps = {
     book: Book,
     openModal: (book?: Book) => void;
     selectedBook: Book | null;
+    isWishlist: boolean;
 }
 
-const BookCard = ({ book, openModal, selectedBook }: BookCardProps) => {
+const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) => {
+    // Determine the appropriate class name based on book type and selection status
+    const className = `
+        ${isWishlist ? 'book-card-wish' : 'book-card'}
+        ${selectedBook?.id === book?.id ? (isWishlist ? 'active-book-wishlist' : 'active-book') : ''}
+    `.trim();
+
     return (
-        <div className={`${selectedBook?.id === book?.id ? 'active-book' : ''}`}>
-            <div key={book.id} className='book' onClick={() => openModal(book)}>
-                <h3 style={{color: 'orangered'}}>{book.title}</h3>
+        <div className={className}>
+            <div key={book.id} onClick={() => openModal(book)}>
+                <h3 style={{color: 'orange'}}>{book.title}</h3>
                 <p>{book.author}</p>
                 <br/>
                 <div>{book.year}</div>
@@ -19,4 +26,4 @@ const BookCard = ({ book, openModal, selectedBook }: BookCardProps) => {
     )
 }
 
-export default BookCard
+export default BookCard;
