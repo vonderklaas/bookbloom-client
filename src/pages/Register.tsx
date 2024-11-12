@@ -20,7 +20,7 @@ const Register = () => {
         }
     }
 
-    const loginUser = (email: string, password: string) => {
+    const loginUser = async (email: string, password: string) => {
         fetch(`${API_PATH}/login`, {
             method: "POST",
             headers: {
@@ -30,15 +30,24 @@ const Register = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                if (data.user_id) {
-                    setUser({ id: data.user_id, username: data.username });
+                console.log(data)
+                if (data.error === 'Invalid credentials') {
+                    alert('invalid credentials')
+                    return;
+                }
+                if (data.message === 'Logged in successfully') {
+                    alert('Logged in successfully')
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.username);
+                    setUser({ id: data.user_id, username: data.username });
                     navigate('/books')
                 }
             })
-            .catch((error) => console.error("Error:", error));
+            .catch((error) => {
+                console.error("API Error:", error)
+            });
     };
+
 
     const registerUser = (username: string, email: string, password: string) => {
         fetch(`${API_PATH}/register`, {
@@ -55,34 +64,49 @@ const Register = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
+                if (data.error === 'User already exists') {
+                    alert('User already exists')
+                    return;
+                }
                 if (data.message === 'User registered successfully') {
+                    alert('User registered successfully')
                     loginUser(email, password);
                 }
             })
-            .catch((error) => console.error("Error:", error));
+            .catch((error) => {
+                console.error("API Error:", error)
+            });
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <label>
-                    <span>Username</span>
-                    <input type='text' name='username' placeholder='luckyjocker' required />
-                    <br />
-                </label>
-                <label>
-                    <span>Email</span>
-                    <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
-                    <br />
-                </label>
-                <label>
-                    <span>Password</span>
-                    <input type='password' name='password' required />
-                    <br />
-                </label>
-                <button type='submit'>Register</button>
-            </form>
+        <div className="register-wrapper">
+            <div>
+                <h2>Register ✍️</h2>
+                <form onSubmit={handleRegister}>
+                    <label>
+                        <span>Username</span>
+                        <br/>
+                        <input type='text' name='username' placeholder='jacklondon' required />
+                        <br />
+                    </label>
+                    <br/>
+                    <label>
+                        <span>Email</span>
+                        <br/>
+                        <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
+                        <br />
+                    </label>
+                    <br/>
+                    <label>
+                        <span>Password</span>
+                        <br/>
+                        <input type='password' name='password' placeholder="******" required />
+                        <br />
+                    </label>
+                    <br/>
+                    <button type='submit'>Register</button>
+                </form>
+            </div>
         </div>
     );
 };

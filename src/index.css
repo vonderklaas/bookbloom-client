@@ -68,53 +68,45 @@ button:focus-visible {
     }
 }
 
-.ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-}
-
+.ReactModal__Overlay,
 .ReactModal__Overlay--after-open {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-
+    background-color: rgba(0, 0, 0, 0.60) !important;
 }
 
-/* #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    text-align: center;
-} */
+.ReactModal__Content {
+    border: none !important;
+}
 
 .container {
     margin: 0 auto;
-    /* max-width: 1440px; */
+    max-width: 1440px;
     padding: 0 2rem;
-    /* max-width: 1280px; */
-    /* margin: 0 auto; */
-    /* padding: 0 2rem; */
-    /* text-align: center;  */
-    /* width: 100%; */
 }
 
 .books {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .book {
-    background-color: royalblue;
-    border: 0.2rem solid transparent;
+    background-color: transparent;
+    border: 0.2rem solid #747bff;
     padding: 1rem;
     border-radius: 0.5rem;
-    width: 10rem;
-    height: 15rem;
+    width: 12rem;
+    height: 17rem;
     cursor: pointer;
     transition: all .15s;
 
     &:hover {
-        background-color: transparent;
-        border: 0.2rem solid royalblue;
+        background-color: #747bff;
     }
+}
+
+.active-book {
+    background-color: #747bff;
 }
 
 .header {
@@ -136,4 +128,31 @@ button:focus-visible {
 
 .content {
     margin: 2rem 0;
+}
+
+.login-wrapper {
+    margin: 2rem auto 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.register-wrapper {
+    margin: 2rem auto 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+input {
+    padding: 0.3rem;
+    width: 95%;
+}
+
+.add-book-form {
+    min-width: 300px;
+}
+
+.edit-book-form {
+    min-width: 300px;
 }

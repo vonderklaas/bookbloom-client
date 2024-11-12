@@ -25,26 +25,29 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     }
 
     return (
-        <>
-            <h2>Add Book</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <span>Title</span>
-                    <input type='text' name='title' placeholder='Martin Eden' required />
-                    <br />
-                </label>
-                <label>
-                    <span>Author</span>
-                    <input type='text' name='author' placeholder='Jack London' required />
-                    <br />
-                </label>
-                <label>
-                    <span>Year</span>
-                    <input type='number' name='year' placeholder='1909' required />
-                    <br />
-                </label>
-                <button type='submit'>On shelf</button>
-            </form>
-        </>
+        <form className="add-book-form" onSubmit={handleSubmit}>
+            <label>
+                <span>Title</span>
+                <br />
+                <input type='text' name='title' placeholder='Martin Eden' required />
+                <br />
+            </label>
+            <br />
+            <label>
+                <span>Author</span>
+                <br />
+                <input type='text' name='author' placeholder='Jack London' required />
+                <br />
+            </label>
+            <br />
+            <label>
+                <span>Year</span>
+                <br />
+                <input type='number' name='year' placeholder='1909' required />
+                <br />
+            </label>
+            <br />
+            <button type='submit'>Add to shelf 📚</button>
+        </form>
     )
 }

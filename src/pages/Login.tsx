@@ -17,11 +17,10 @@ const Login = () => {
 
         if (email && password) {
             loginUser(email, password)
-            navigate('/')
         }
     }
 
-    const loginUser = (email: string, password: string) => {
+    const loginUser = async (email: string, password: string) => {
         fetch(`${API_PATH}/login`, {
             method: "POST",
             headers: {
@@ -31,31 +30,46 @@ const Login = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                if (data.user_id) {
+                console.log(data)
+                if (data.error === 'Invalid credentials') {
+                    alert('invalid credentials')
+                    return;
+                }
+                if (data.message === 'Logged in successfully') {
+                    alert('Logged in successfully')
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.username);
                     setUser({ id: data.user_id, username: data.username });
+                    navigate('/books')
                 }
             })
-            .catch((error) => console.error("Error:", error));
+            .catch((error) => {
+                console.error("API Error:", error)
+            });
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <label>
-                    <span>Email</span>
-                    <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
+        <div className="login-wrapper">
+            <div>
+                <h2>Login 🙋‍♂️</h2>
+                <form onSubmit={handleLogin}>
+                    <label>
+                        <span>Email</span>
+                        <br />
+                        <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
+                        <br />
+                    </label>
                     <br />
-                </label>
-                <label>
-                    <span>Password</span>
-                    <input type='password' name='password' required />
+                    <label>
+                        <span>Password</span>
+                        <br />
+                        <input type='password' name='password' placeholder="******" required />
+                        <br />
+                    </label>
                     <br />
-                </label>
-                <button type='submit'>Login</button>
-            </form>
+                    <button type='submit'>Login</button>
+                </form>
+            </div>
         </div>
     );
 };

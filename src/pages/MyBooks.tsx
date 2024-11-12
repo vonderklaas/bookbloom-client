@@ -6,8 +6,13 @@ import { AddBookForm } from '../components/AddBookForm';
 import { ListOfBooks } from '../components/ListOfBooks';
 import { API_PATH, modalStyles } from '../constants';
 import { useUser } from '../context/UserContext';
+import BookControls from '../components/BookControls';
 
-const MyBooks = () => {
+type MyBooksProps = {
+    isWishlist?: boolean;  // New prop to toggle between books and wishlist
+}
+
+const MyBooks = ({isWishlist}: MyBooksProps) => {
     const [books, setBooks] = useState<Book[]>([]);
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -17,31 +22,32 @@ const MyBooks = () => {
 
     const { user } = useUser();
 
+    // Fetch books or wishlist items based on `isWishlist` prop
     useEffect(() => {
         if (user?.id) {
-            requestAllBooks();
+            fetchBooksOrWishlist();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user?.id])
+    }, [user?.id, isWishlist]);
 
-    const requestAllBooks = async () => {
+
+    const fetchBooksOrWishlist = async () => {
         setIsProcessing(true);
-        const response = await fetch(`${API_PATH}/books?user_id=${user?.id}`);
+        const response = await fetch(`${API_PATH}/books?user_id=${user?.id}&wishlist=${isWishlist}`);
         const data = await response.json();
         setBooks(data);
         setIsProcessing(false);
     };
 
+
     const deleteBook = async ({ id }: Book) => {
-        closeModal();
         setIsProcessing(true);
+        closeModal();
         const response = await fetch(`${API_PATH}/books/${id}?user_id=${user?.id}`, {
             method: "DELETE"
         });
 
         if (response.ok) {
-            closeModal();
-            requestAllBooks();
+            fetchBooksOrWishlist();
         }
         setIsProcessing(false);
     };
@@ -59,7 +65,7 @@ const MyBooks = () => {
             },
         });
 
-        requestAllBooks();
+        fetchBooksOrWishlist();
         setIsProcessing(false);
     }
 
@@ -69,10 +75,10 @@ const MyBooks = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ ...newBook, user_id: user?.id }),
+            body: JSON.stringify({ ...newBook, user_id: user?.id, wishlist: isWishlist }),
         });
-        requestAllBooks();
-    }
+        fetchBooksOrWishlist();
+    };
 
     const openEditMode = () => {
         setIsEditMode(true);
@@ -93,36 +99,27 @@ const MyBooks = () => {
     };
 
     return (
-        <div className='container'>
-            <div className='content'>
-                <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} setIsAddMode={setIsAddMode} />
-                {modalIsOpen && (
-                    <Modal
-                        isOpen={modalIsOpen}
-                        onRequestClose={closeModal}
-                        style={modalStyles}
-                    >
-                        <div>
-                            {isAddMode && (
-                                <AddBookForm addBook={addBook} closeModal={closeModal} setIsAddMode={setIsAddMode} />
-                            )}
-                            {isEditMode && selectedBook && (
-                                <EditBookForm selectedBook={selectedBook} editBook={editBook} closeModal={closeModal} />
-                            )}
-                            {!isEditMode && selectedBook && (
-                                <>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                        <h3>{selectedBook.title}</h3>
-                                        <button onClick={closeModal}>x</button>
-                                    </div>
-                                    <button onClick={openEditMode}>edit</button>
-                                    <button onClick={() => deleteBook(selectedBook)}>delete</button>
-                                </>
-                            )}
-                        </div>
-                    </Modal>
-                )}
-            </div>
+        <div className='content'>
+            <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} setIsAddMode={setIsAddMode} selectedBook={selectedBook}/>
+            {modalIsOpen && (
+                <Modal
+                    isOpen={modalIsOpen}
+                    onRequestClose={closeModal}
+                    style={modalStyles}
+                >
+                    <div>
+                        {!isEditMode && selectedBook && (
+                            <BookControls selectedBook={selectedBook} closeModal={closeModal} openEditMode={openEditMode} deleteBook={deleteBook} />
+                        )}
+                        {isEditMode && selectedBook && (
+                            <EditBookForm selectedBook={selectedBook} editBook={editBook} closeModal={closeModal} />
+                        )}
+                        {isAddMode && (
+                            <AddBookForm addBook={addBook} closeModal={closeModal} setIsAddMode={setIsAddMode} />
+                        )}
+                    </div>
+                </Modal>
+            )}
         </div>
     )
 }

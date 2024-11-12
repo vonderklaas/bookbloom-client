@@ -14,16 +14,6 @@ export const Header = () => {
         if (user_id && username) {
             setUser({ id: user_id, username: username });
         }
-
-        // On app load, check if user info exists
-        // const userId = localStorage.getItem('user_id');
-        // if (userId) {
-        //     const username = localStorage.getItem('username');
-        //     setUser({ id: userId, username });
-        //     console.log(`Welcome back, ${username}`);
-        // } else {
-        //     console.log("User is not logged in.");
-        // }
     }
 
     useEffect(() => {
@@ -44,24 +34,22 @@ export const Header = () => {
             <Link to={`/`}>
                 <h2>bookbloom</h2>
             </Link>
-            <nav>
+            <>
                 {!user && (
-                    <div style={{ display: 'flex', gap: '2rem' }}>
+                    <nav style={{ display: 'flex', gap: '2rem' }}>
                         <Link to={`login`}>Login</Link>
                         <Link to={`register`}>Register</Link>
-                    </div>)}
-                {user ? (
-                    <>
+                    </nav>)}
+                {user && (
+                    <nav>
+                        <Link to={`wishlist`}>Wishlist</Link>
                         <Link to={`books`}>My books</Link>
-                        <div>
-                            Username: {user.username}
-                        </div>
-                        <div onClick={logout}>
+                        <a href='' onClick={logout}>
                             Logout
-                        </div>
-                    </>
-                ) : <div>No User</div>}
-            </nav>
+                        </a>
+                    </nav>
+                )}
+            </>
         </header>
     )
 }

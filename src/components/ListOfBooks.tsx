@@ -1,15 +1,18 @@
 import { LOADING_MESSAGES } from "../constants";
 import { useUser } from "../context/UserContext";
 import { Book } from "../types";
+import BookCard from "./Book";
 
 type ListOfBooksProps = {
+    wishlist?: boolean; // New prop to indicate if we’re fetching wishlist books
     books: Book[]
     isProcessing: boolean;
     openModal: (book?: Book) => void;
-    setIsAddMode: React.Dispatch<React.SetStateAction<boolean>>
+    setIsAddMode: React.Dispatch<React.SetStateAction<boolean>>;
+    selectedBook: Book | null;
 }
 
-export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode }: ListOfBooksProps) => {
+export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, selectedBook }: ListOfBooksProps) => {
 
     const { user } = useUser();
 
@@ -23,11 +26,7 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode }: Li
     return (
         <>
             {user?.id && books.length >= 1 && (
-                <>
-                    <button onClick={handleAddBook}>Add book</button>
-                    <br />
-                    <br />
-                </>
+                <button onClick={handleAddBook}>Add a book 📚</button>
             )}
             <div className='books'>
                 {!isProcessing ? (
@@ -35,24 +34,19 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode }: Li
                         {books.length > 0 ? (
                             <>
                                 {books.map((book) => (
-                                    <div key={book.id} className='book' onClick={() => openModal(book)}>
-                                        <h3>{book.title}</h3>
-                                        <p>{book.author}</p>
-                                        <div>Published at {book.year}</div>
+                                    <div key={book.id}>
+                                        <BookCard book={book} openModal={openModal} selectedBook={selectedBook} />
                                     </div>
                                 ))}
                             </>
                         ) : (
                             <>
                                 {user?.id ? (
-                                    <div>
-                                        No books, add one?
-                                        <button onClick={handleAddBook}>Add book</button>
-                                    </div>
+                                    <button onClick={handleAddBook}>Add a book 📚</button>
                                 ) : (
-                                    <div>
-                                        Register to add some books!
-                                    </div>
+                                    <span>
+                                        No user — no books.
+                                    </span>
                                 )}
                             </>
                         )}

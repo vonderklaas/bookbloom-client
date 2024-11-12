@@ -26,7 +26,7 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
     }
 
     return (
-        <div>
+        <div className="edit-book-form">
             <h2>Edit Book</h2>
             <form onSubmit={handleEdit}>
                 <label>
@@ -34,18 +34,23 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                     <input type='text' name='title' placeholder='Martin Eden' defaultValue={selectedBook.title} required />
                     <br />
                 </label>
+                <br />
                 <label>
                     <span>Author</span>
                     <input type='text' name='author' placeholder='Jack London' defaultValue={selectedBook.author} required />
                     <br />
                 </label>
+                <br />
                 <label>
                     <span>Year</span>
                     <input type='number' name='year' placeholder='1909' defaultValue={selectedBook.year} required />
                     <br />
                 </label>
-                <button type='submit'>Save</button>
-                <button type='button' onClick={closeModal}>Discard</button>
+                <br />
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <button type='submit'>Save 📌</button>
+                    <button type='button' onClick={closeModal}>Discard 🗃️</button>
+                </div>
             </form>
         </div>
     )
