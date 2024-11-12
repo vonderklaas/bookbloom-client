@@ -85,6 +85,7 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
     }
 
     const openModal = (book?: Book) => {
+        console.log('openModal');
         if (book) {
             setSelectedBook(book);
         }

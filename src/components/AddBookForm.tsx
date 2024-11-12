@@ -7,6 +7,9 @@ type AddBookFormProps = {
 }
 
 export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, setIsAddMode }) => {
+
+    const currentYear = new Date().getFullYear();
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -29,21 +32,21 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
             <label>
                 <span>Title</span>
                 <br />
-                <input type='text' name='title' placeholder='Martin Eden' required />
+                <input type='text' name='title' max={128} placeholder='Martin Eden' required />
                 <br />
             </label>
             <br />
             <label>
                 <span>Author</span>
                 <br />
-                <input type='text' name='author' placeholder='Jack London' required />
+                <input type='text' name='author' max={128} placeholder='Jack London' required />
                 <br />
             </label>
             <br />
             <label>
                 <span>Year</span>
                 <br />
-                <input type='number' name='year' placeholder='1909' required />
+                <input type='number' name='year' max={currentYear} placeholder='1909' required />
                 <br />
             </label>
             <br />

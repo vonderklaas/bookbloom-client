@@ -8,6 +8,8 @@ type EditBookFormProps = {
 
 export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBook, closeModal }) => {
 
+    const currentYear = new Date().getFullYear();
+
     const handleEdit = async (e: React.FormEvent<HTMLFormElement>) => {
         if (!selectedBook.id) return;
 
@@ -31,19 +33,19 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
             <form onSubmit={handleEdit}>
                 <label>
                     <span>Title</span>
-                    <input type='text' name='title' placeholder='Martin Eden' defaultValue={selectedBook.title} required />
+                    <input type='text' name='title' max={128} placeholder='Martin Eden' defaultValue={selectedBook.title} required />
                     <br />
                 </label>
                 <br />
                 <label>
                     <span>Author</span>
-                    <input type='text' name='author' placeholder='Jack London' defaultValue={selectedBook.author} required />
+                    <input type='text' name='author' max={128} placeholder='Jack London' defaultValue={selectedBook.author} required />
                     <br />
                 </label>
                 <br />
                 <label>
                     <span>Year</span>
-                    <input type='number' name='year' placeholder='1909' defaultValue={selectedBook.year} required />
+                    <input type='number' name='year' max={currentYear} placeholder='1909' defaultValue={selectedBook.year} required />
                     <br />
                 </label>
                 <br />
