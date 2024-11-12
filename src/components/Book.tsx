@@ -4,7 +4,7 @@ type BookCardProps = {
     book: Book,
     openModal: (book?: Book) => void;
     selectedBook: Book | null;
-    isWishlist: boolean;
+    isWishlist: boolean | undefined;
 }
 
 const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) => {
