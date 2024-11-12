@@ -26,7 +26,7 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, sele
     return (
         <>
             {user?.id && books.length >= 1 && (
-                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish 📚' : 'Add a book 📚'}</button>
+                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish ✨' : 'Add a book 📚'}</button>
             )}
             <div className='books'>
                 {!isProcessing ? (

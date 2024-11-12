@@ -1,8 +1,8 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1.15rem;
+    font-weight: 500;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
@@ -34,8 +34,8 @@ h1 {
 button {
     border-radius: 0.5rem;
     border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
+    padding: 0.6em 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
@@ -69,7 +69,7 @@ button:focus-visible {
 
 .ReactModal__Overlay,
 .ReactModal__Overlay--after-open {
-    background-color: rgba(0, 0, 0, 0.60) !important;
+    background-color: rgba(0, 0, 0, 0.85) !important;
 }
 
 .ReactModal__Content {
@@ -82,10 +82,16 @@ button:focus-visible {
     padding: 0 2rem;
 }
 
+@media screen and (max-width: 425px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
 .books {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
@@ -94,7 +100,7 @@ button:focus-visible {
     border: 0.2rem solid #747bff;
     padding: 1rem;
     border-radius: 0.5rem;
-    width: 12rem;
+    width: 11rem;
     height: 17rem;
     cursor: pointer;
     transition: all .15s;
@@ -120,6 +126,41 @@ button:focus-visible {
     }
 }
 
+@media screen and (max-width: 768px) {
+    .book-card,
+    .book-card-wish {
+        width: 10rem;
+        height: 15rem;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .book-card,
+    .book-card-wish {
+        width: 8rem;
+        height: 12rem;
+    }
+}
+
+.book-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.book-card-title {
+    color: orange;
+}
+
+/* .book-card-author {
+    color: 
+} */
+
+.book-card-year {
+    text-align: right;
+}
+
 .active-book {
     background-color: #747bff;
 }
@@ -139,6 +180,13 @@ button:focus-visible {
     justify-content: space-between;
     margin: 0 auto;
     width: 100%;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
 }
 
 .header h2 {
@@ -155,7 +203,7 @@ button:focus-visible {
 }
 
 .login-wrapper {
-    margin: 2rem auto 0 auto;
+    margin: 3rem auto 0 auto;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -163,11 +211,11 @@ button:focus-visible {
     padding: 1rem 0.5rem 1.6rem 0;
     width: 300px;
     background-color: rgba(0, 0, 0, 0.60) !important;
-    box-shadow: 2px 4px 30px #747bff;
+    box-shadow: 2px 2px 25px #747bff;
 }
 
 .register-wrapper {
-    margin: 2rem auto 0 auto;
+    margin: 3rem auto 0 auto;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -175,12 +223,14 @@ button:focus-visible {
     padding: 1rem 0.5rem 1.6rem 0;
     max-width: 300px;
     background-color: rgba(0, 0, 0, 0.60) !important;
-    box-shadow: 2px 4px 30px #747bff;
+    box-shadow: 2px 2px 25px #747bff;
 }
 
 input {
+    min-width: 12rem;
     padding: 0.3rem;
     width: 95%;
+    font-size: 0.9rem;
 }
 
 .add-book-form {

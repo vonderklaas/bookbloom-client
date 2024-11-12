@@ -16,11 +16,12 @@ const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) 
 
     return (
         <div className={className} onClick={() => openModal(book)}>
-            <div key={book.id}>
-                <h3 style={{color: 'orange'}}>{book.title}</h3>
-                <p>{book.author}</p>
-                <br/>
-                <div>{book.year}</div>
+            <div className='book-card-wrapper' key={book.id}>
+                <div>
+                    <h3 className='book-card-title'>{book.title}</h3>
+                    <p className='book-card-author'>{book.author}</p>
+                </div>
+                <div className='book-card-year'>{book.year}</div>
             </div>
         </div>
     )

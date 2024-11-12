@@ -45,8 +45,8 @@ export const Header = () => {
                     </nav>
                 ) : (
                     <nav style={{ display: 'flex', gap: '2rem' }}>
+                        <Link to={`books`} className={isActive('books') ? 'active' : ''}>Library</Link>
                         <Link to={`wishlist`} className={isActive('wishlist') ? 'active' : ''}>Wishlist</Link>
-                        <Link to={`books`} className={isActive('books') ? 'active' : ''}>My books</Link>
                         <a href='' onClick={logout}>
                             Logout
                         </a>

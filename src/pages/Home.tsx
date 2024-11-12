@@ -37,15 +37,17 @@ export const Home = () => {
             <h1>
                 Welcome, <span style={{ color: "orange" }}>{user?.id ? user?.username : 'wanderer'}</span>!
             </h1>
-            <p>Manage your personal book collection and keep track of your favorite reads.</p>
+            <br/>
+            <p>Manage your book <b>collection</b> and keep track of your favorite reads.</p>
+            <p>Add books to your <b>wishlist</b> so you never forget that exciting title you are dying to read.</p>
             <br />
             <div className="stats">
-                <h2>Currently tracking</h2>
+                <h2>Currently Tracking</h2>
                 {totalReaders ? (
-                    <h3><span style={{ color: "orange" }}>{totalReaders ?? "..."} readers</span></h3>
+                    <h3>📖 Readers — <span style={{ color: "orange" }}>{totalReaders ?? "..."}</span></h3>
                 ) : <h3>...</h3>}
                 {totalBooks ? (
-                    <h3><span style={{ color: "orange" }}>{totalBooks ?? "..."} books</span></h3>
+                    <h3>📚 Books — <span style={{ color: "orange" }}>{totalBooks ?? "..."}</span></h3>
                 ) : <h3>...</h3>}
             </div>
         </div>
