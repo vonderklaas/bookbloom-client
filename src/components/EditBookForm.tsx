@@ -1,4 +1,4 @@
-import { Book } from "./types";
+import { Book } from "../types";
 
 type EditBookFormProps = {
     selectedBook: Book;
@@ -36,12 +36,12 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                 </label>
                 <label>
                     <span>Author</span>
-                    <input type='text' name='author' placeholder='Jack London' defaultValue={selectedBook.author} required/>
+                    <input type='text' name='author' placeholder='Jack London' defaultValue={selectedBook.author} required />
                     <br />
                 </label>
                 <label>
                     <span>Year</span>
-                    <input type='number' name='year' placeholder='1909' defaultValue={selectedBook.year} required/>
+                    <input type='number' name='year' placeholder='1909' defaultValue={selectedBook.year} required />
                     <br />
                 </label>
                 <button type='submit'>Save</button>

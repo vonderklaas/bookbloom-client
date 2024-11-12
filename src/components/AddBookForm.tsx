@@ -1,4 +1,4 @@
-import { Book } from "./types";
+import { Book } from "../types";
 
 type AddBookFormProps = {
     addBook: (book: Book) => void;
