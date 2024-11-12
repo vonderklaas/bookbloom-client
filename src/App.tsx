@@ -5,29 +5,31 @@ import { EditBookForm } from './EditBookForm';
 import { AddBookForm } from './AddBookForm';
 import { ListOfBooks } from './ListOfBooks';
 import { API_PATH, modalStyles } from './constants';
+import { Header } from './Header';
 
 const App = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
+    const [isAddMode, setIsAddMode] = useState<boolean>(false);
     const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        fetchBooks();
+        requestAllBooks();
     }, [])
 
-    const fetchBooks = async () => {
+    const requestAllBooks = async () => {
         setIsProcessing(true);
 
         const response = await fetch(`${API_PATH}/books`)
         const data = await response.json();
 
-        setIsProcessing(false);
         setBooks(data);
+        setIsProcessing(false);
     }
 
-    const handleDelete = async ({ id }: Book) => {
+    const deleteBook = async ({ id }: Book) => {
         closeModal();
         setIsProcessing(true);
 
@@ -37,7 +39,7 @@ const App = () => {
 
         if (response.ok) {
             closeModal();
-            fetchBooks();
+            requestAllBooks();
         }
 
         setIsProcessing(false);
@@ -56,52 +58,73 @@ const App = () => {
             },
         });
 
-        fetchBooks();
+        requestAllBooks();
         setIsProcessing(false);
+    }
+
+    const addBook = async (newBook: Book) => {
+        await fetch(`${API_PATH}/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newBook),
+        });
+        requestAllBooks();
     }
 
     const openEditMode = () => {
         setIsEditMode(true);
     }
 
-    const openModal = (book: Book) => {
-        setSelectedBook(book);
+    const openModal = (book?: Book) => {
+        if (book) {
+            setSelectedBook(book);
+        }
         setIsOpen(true);
     };
 
     const closeModal = () => {
         setIsEditMode(false);
         setIsOpen(false);
+        setSelectedBook(null)
+        setIsAddMode(false)
     };
 
     return (
-        <>
-            <h1>Bookshelf App</h1>
-            <AddBookForm fetchBooks={fetchBooks} />
-            <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} />
-            {selectedBook && (
-                <Modal
-                    isOpen={modalIsOpen}
-                    onRequestClose={closeModal}
-                    style={modalStyles}
-                >
-                    <div>
-                        {isEditMode ? (
-                            <EditBookForm selectedBook={selectedBook} editBook={editBook} closeModal={closeModal} />
-                        ) : (
-                            <>
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <h3>{selectedBook.title}</h3>
-                                    <button onClick={closeModal}>x</button>
-                                </div>
-                                <button onClick={openEditMode}>edit</button>
-                                <button onClick={() => handleDelete(selectedBook)}>delete</button>
-                            </>
-                        )}
-                    </div>
-                </Modal>
-            )}
-        </>
+        <div className='container'>
+            <Header setIsAddMode={setIsAddMode} openModal={openModal} />
+            <div className='content'>
+                <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} />
+                {modalIsOpen && (
+                    <Modal
+                        isOpen={modalIsOpen}
+                        onRequestClose={closeModal}
+                        style={modalStyles}
+                    >
+                        <div>
+                            {isAddMode && (
+                                <AddBookForm addBook={addBook} closeModal={closeModal} setIsAddMode={setIsAddMode}/>
+                            )}
+                            {isEditMode && selectedBook && (
+                                <EditBookForm selectedBook={selectedBook} editBook={editBook} closeModal={closeModal} />
+                            )}
+                            {!isEditMode && selectedBook && (
+                                <>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <h3>{selectedBook.title}</h3>
+                                        <button onClick={closeModal}>x</button>
+                                    </div>
+                                    <button onClick={openEditMode}>edit</button>
+                                    <button onClick={() => deleteBook(selectedBook)}>delete</button>
+                                </>
+                            )}
+
+                        </div>
+                    </Modal>
+                )}
+            </div>
+        </div>
     )
 }
 

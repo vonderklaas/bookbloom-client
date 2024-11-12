@@ -2,11 +2,9 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -25,10 +23,8 @@ a:hover {
 
 body {
     margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    /* display: flex; */
+    /* place-items: center; */
 }
 
 h1 {
@@ -81,11 +77,22 @@ button:focus-visible {
 
 }
 
-#root {
+/* #root {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 1rem;
     text-align: center;
+} */
+
+.container {
+    margin: 0 auto;
+    /* max-width: 1440px; */
+    padding: 0 2rem;
+    /* max-width: 1280px; */
+    /* margin: 0 auto; */
+    /* padding: 0 2rem; */
+    /* text-align: center;  */
+    /* width: 100%; */
 }
 
 .books {
@@ -95,15 +102,38 @@ button:focus-visible {
 }
 
 .book {
-    border: 0.1rem solid royalblue;
+    background-color: royalblue;
+    border: 0.2rem solid transparent;
     padding: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     width: 10rem;
     height: 15rem;
     cursor: pointer;
     transition: all .15s;
 
     &:hover {
-        background-color: royalblue;
+        background-color: transparent;
+        border: 0.2rem solid royalblue;
     }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.header h2 {
+    color: darkkhaki
+}
+
+.header nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.content {
+    margin: 2rem 0;
 }

@@ -1,11 +1,12 @@
-import { API_PATH } from "./constants";
 import { Book } from "./types";
 
 type AddBookFormProps = {
-    fetchBooks: () => void;
+    addBook: (book: Book) => void;
+    closeModal: () => void;
+    setIsAddMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const AddBookForm: React.FC<AddBookFormProps> = ({ fetchBooks }) => {
+export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, setIsAddMode }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -18,18 +19,9 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ fetchBooks }) => {
         if (title && author && year) {
             const newBook = { title, author, year }
             addBook(newBook)
+            closeModal()
+            setIsAddMode(false);
         }
-    }
-
-    const addBook = async (newBook: Book) => {
-        await fetch(`${API_PATH}/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newBook),
-        });
-        fetchBooks();
     }
 
     return (
