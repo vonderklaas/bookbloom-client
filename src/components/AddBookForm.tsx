@@ -65,7 +65,6 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
             );
             const data = await response.json();
             if (data.year && !data.year.trim().includes("not found")) {
-                console.log(data);
                 setYear(data.year.trim());
             } else {
                 toast.error("Year generation failed. Please try again or enter manually.");

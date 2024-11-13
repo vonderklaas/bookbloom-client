@@ -26,7 +26,7 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
     return (
         <>
             {user?.id && books.length >= 1 && (
-                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish ✨' : 'Add a book 📚'}</button>
+                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish' : 'Add a book'}</button>
             )}
             <div className='books'>
                 {!isProcessing ? (
@@ -42,11 +42,16 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
                         ) : (
                             <>
                                 {user?.id ? (
-                                    <button onClick={handleAddBook}>{isWishlist ? 'Add a wish ✨' : 'Add a book 📚'}</button>
+                                    <div>
+                                        <button onClick={handleAddBook}>{isWishlist ? 'Add a wish' : 'Add a book'}</button>
+                                    </div>
                                 ) : (
-                                    <span>
-                                        No user — no books.
-                                    </span>
+                                    <div>
+                                        <p>
+                                            No user — no books.
+                                        </p>
+                                        <p>Authenticate and come back!</p>
+                                    </div>
                                 )}
                             </>
                         )}

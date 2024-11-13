@@ -24,7 +24,7 @@
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     font-weight: 500;
     color-scheme: light dark;
@@ -168,8 +168,9 @@ button:focus-visible {
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: 100%;
     margin-bottom: 5rem;
+    background-color: #111;
+    padding: 0 2rem;
 }
 
 .header h2 {
@@ -241,7 +242,7 @@ input {
 }
 
 .ai-button:disabled {
-    opacity: 0.3;
+    opacity: 1;
     background-color: none;
     cursor: not-allowed;
 }
@@ -273,6 +274,16 @@ input {
     max-width: 350px;
 }
 
+.footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: calc(100% - 70px);
+    background-color: #111;
+    bottom: 0;
+    padding: 0.5rem 2rem;
+}
+
 @media screen and (max-width: 768px) {
 
     .home h1 {
@@ -298,6 +309,7 @@ input {
 
     .header {
         flex-direction: column;
+        padding-bottom: 1rem;
     }
 
     .book-card,

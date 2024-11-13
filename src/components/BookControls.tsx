@@ -19,8 +19,8 @@ export const BookControls = ({ selectedBook, closeModal, openEditMode, deleteBoo
             <br />
             <br />
             <div style={{ display: 'flex', gap: '1rem' }}>
-                <button onClick={openEditMode}>Update details 🔖</button>
-                <button onClick={() => deleteBook(selectedBook)}>Remove book 🗑️</button>
+                <button onClick={openEditMode}>Update details</button>
+                <button onClick={() => deleteBook(selectedBook)}>Remove book</button>
             </div>
         </div>
     )

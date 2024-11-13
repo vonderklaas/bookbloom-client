@@ -31,7 +31,6 @@ export const Login = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 if (data.error === 'Invalid credentials') {
                     toast.error('Invalid credentials, try again.')
                     return;
@@ -52,7 +51,7 @@ export const Login = () => {
     return (
         <div className="login-wrapper">
             <div>
-                <h2>Login 🙋‍♂️</h2>
+                <h2>Login</h2>
                 <form onSubmit={handleLogin}>
                     <label>
                         <p>Email</p>

@@ -8,13 +8,10 @@ type BookCardProps = {
 }
 
 const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) => {
-    // Determine the appropriate class name based on book type and selection status
     const className = `
         ${isWishlist ? 'book-card-wish' : 'book-card'}
         ${selectedBook?.id === book?.id ? (isWishlist ? 'active-book-wishlist' : 'active-book') : ''}
     `.trim();
-
-    console.log('book', book)
 
     return (
         <div className={className} onClick={() => openModal(book)}>

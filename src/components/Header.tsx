@@ -36,7 +36,7 @@ export const Header = () => {
     return (
         <header className="header">
             <Link to={`/`}>
-                <h2>bookbloom</h2>
+                <h3>bookbloom</h3>
             </Link>
             <>
                 {!user ? (

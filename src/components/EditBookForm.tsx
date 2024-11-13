@@ -65,8 +65,8 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                 </label>
                 <br />
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button type='submit'>Save 📌</button>
-                    <button type='button' onClick={closeModal}>Discard 🗃️</button>
+                    <button type='submit'>Save</button>
+                    <button type='button' onClick={closeModal}>Discard</button>
                 </div>
             </form>
         </div>

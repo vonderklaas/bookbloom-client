@@ -31,7 +31,6 @@ export const Register = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 if (data.error === 'Invalid credentials') {
                     toast.error('Invalid credentials, try again.')
                     return;
@@ -64,7 +63,6 @@ export const Register = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 if (data.error === 'User already exists') {
                     toast.error('User already exists.')
                     return;
@@ -83,7 +81,7 @@ export const Register = () => {
     return (
         <div className="register-wrapper">
             <div>
-                <h2>Register ✍️</h2>
+                <h2>Register</h2>
                 <form onSubmit={handleRegister}>
                     <label>
                         <p>Username</p>
