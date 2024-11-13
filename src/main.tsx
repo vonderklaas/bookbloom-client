@@ -1,15 +1,15 @@
-// main.tsx
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
 import Modal from "react-modal";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App.tsx";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { UserProvider } from "./context/UserContext.tsx";
-import Login from "./pages/Login.tsx";
-import Register from "./pages/Register.tsx";
-import MyBooks from "./pages/MyBooks.tsx";
-import {Home} from "./pages/Home.tsx";
-import MyWishlist from "./pages/MyWishlist.tsx";
+import { Login } from "./pages/Login.tsx";
+import { Register } from "./pages/Register.tsx";
+import { Collection } from "./pages/Collection.tsx";
+import { Home } from "./pages/Home.tsx";
+import { Toaster } from "react-hot-toast";
+
+import "./index.css";
 
 const router = createBrowserRouter([
     {
@@ -29,12 +29,16 @@ const router = createBrowserRouter([
                 element: <Register />,
             },
             {
-                path: "books",
-                element: <MyBooks />,
+                path: "collection",
+                element: <Collection isWishlist={false} />,
             },
             {
                 path: "wishlist",
-                element: <MyWishlist />,
+                element: <Collection isWishlist={true} />,
+            },
+            {
+                path: "*",
+                element: <Navigate to="/" replace />,
             },
         ],
     },
@@ -43,7 +47,10 @@ const router = createBrowserRouter([
 Modal.setAppElement("#root");
 
 createRoot(document.getElementById("root")!).render(
-    <UserProvider>
-        <RouterProvider router={router} />
-    </UserProvider>
+    <>
+        <Toaster position="top-center" reverseOrder={false} />
+        <UserProvider>
+            <RouterProvider router={router} />
+        </UserProvider>
+    </>
 );

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import toast from "react-hot-toast";
 
 export const Header = () => {
 
@@ -23,10 +24,10 @@ export const Header = () => {
     }, [])
 
     const logout = () => {
+        toast('User logged out.');
         localStorage.removeItem('user_id');
         localStorage.removeItem('username');
         setUser(null);
-        console.log("User logged out.");
         navigate('/')
     }
 
@@ -39,17 +40,15 @@ export const Header = () => {
             </Link>
             <>
                 {!user ? (
-                    <nav style={{ display: 'flex', gap: '2rem' }}>
+                    <nav style={{ display: 'flex', gap: '1.5rem' }}>
                         <Link to={`login`} className={isActive('login') ? 'active' : ''}>Login</Link>
                         <Link to={`register`} className={isActive('register') ? 'active' : ''}>Register</Link>
                     </nav>
                 ) : (
-                    <nav style={{ display: 'flex', gap: '2rem' }}>
-                        <Link to={`books`} className={isActive('books') ? 'active' : ''}>Library</Link>
+                    <nav style={{ display: 'flex', gap: '1.5rem' }}>
+                        <Link to={`collection`} className={isActive('collection') ? 'active' : ''}>Collection</Link>
                         <Link to={`wishlist`} className={isActive('wishlist') ? 'active' : ''}>Wishlist</Link>
-                        <a href='' onClick={logout}>
-                            Logout
-                        </a>
+                        <span className="link" onClick={logout}>Logout</span>
                     </nav>
                 )}
             </>

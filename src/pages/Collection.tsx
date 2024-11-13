@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
 import Modal from 'react-modal';
-import { Book } from '../types';
+import { useEffect, useState } from 'react'
+import { Book } from '../types/types';
 import { EditBookForm } from '../components/EditBookForm';
 import { AddBookForm } from '../components/AddBookForm';
-import { ListOfBooks } from '../components/ListOfBooks';
-import { API_PATH, modalStyles } from '../constants';
+import { BooksList } from '../components/BooksList';
+import { API_PATH, modalStyles } from '../constants/constants';
 import { useUser } from '../context/UserContext';
-import BookControls from '../components/BookControls';
+import { BookControls } from '../components/BookControls';
+import toast from 'react-hot-toast';
 
-type MyBooksProps = {
-    isWishlist?: boolean;  // New prop to toggle between books and wishlist
+type CollectionProps = {
+    isWishlist: boolean;
 }
 
-const MyBooks = ({isWishlist}: MyBooksProps) => {
+export const Collection = ({ isWishlist }: CollectionProps) => {
     const [books, setBooks] = useState<Book[]>([]);
     const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -22,22 +23,25 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
 
     const { user } = useUser();
 
-    // Fetch books or wishlist items based on `isWishlist` prop
     useEffect(() => {
         if (user?.id) {
             fetchBooksOrWishlist();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user?.id, isWishlist]);
 
 
     const fetchBooksOrWishlist = async () => {
         setIsProcessing(true);
         const response = await fetch(`${API_PATH}/books?user_id=${user?.id}&wishlist=${isWishlist}`);
-        const data = await response.json();
-        setBooks(data);
-        setIsProcessing(false);
+        if (response.ok) {
+            const data = await response.json();
+            setBooks(data);
+            setIsProcessing(false);
+        } else {
+            return
+        }
     };
-
 
     const deleteBook = async ({ id }: Book) => {
         setIsProcessing(true);
@@ -70,22 +74,30 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
     }
 
     const addBook = async (newBook: Book) => {
-        await fetch(`${API_PATH}/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ...newBook, user_id: user?.id, wishlist: isWishlist }),
-        });
-        fetchBooksOrWishlist();
+        try {
+            const response = await fetch(`${API_PATH}/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...newBook, user_id: user?.id, fromWishlist: isWishlist }),
+            });
+            if (!response.ok) {
+                toast.error("Failed to add the book. Please try again.");
+            } else {
+                fetchBooksOrWishlist();
+            }
+        } catch (error) {
+            toast.error(`An error occurred while adding the book. ${error}`);
+        }
     };
+
 
     const openEditMode = () => {
         setIsEditMode(true);
     }
 
     const openModal = (book?: Book) => {
-        console.log('openModal');
         if (book) {
             setSelectedBook(book);
         }
@@ -101,7 +113,14 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
 
     return (
         <div className='content'>
-            <ListOfBooks books={books} openModal={openModal} isProcessing={isProcessing} setIsAddMode={setIsAddMode} selectedBook={selectedBook} isWishlist={isWishlist}/>
+            <BooksList
+                books={books}
+                openModal={openModal}
+                isProcessing={isProcessing}
+                setIsAddMode={setIsAddMode}
+                selectedBook={selectedBook}
+                isWishlist={isWishlist}
+            />
             {modalIsOpen && (
                 <Modal
                     isOpen={modalIsOpen}
@@ -110,13 +129,26 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
                 >
                     <div>
                         {!isEditMode && selectedBook && (
-                            <BookControls selectedBook={selectedBook} closeModal={closeModal} openEditMode={openEditMode} deleteBook={deleteBook} />
+                            <BookControls
+                                selectedBook={selectedBook}
+                                closeModal={closeModal}
+                                openEditMode={openEditMode}
+                                deleteBook={deleteBook}
+                            />
                         )}
                         {isEditMode && selectedBook && (
-                            <EditBookForm selectedBook={selectedBook} editBook={editBook} closeModal={closeModal} />
+                            <EditBookForm
+                                selectedBook={selectedBook}
+                                editBook={editBook}
+                                closeModal={closeModal}
+                            />
                         )}
                         {isAddMode && (
-                            <AddBookForm addBook={addBook} closeModal={closeModal} setIsAddMode={setIsAddMode} />
+                            <AddBookForm
+                                addBook={addBook}
+                                closeModal={closeModal}
+                                setIsAddMode={setIsAddMode}
+                            />
                         )}
                     </div>
                 </Modal>
@@ -124,5 +156,3 @@ const MyBooks = ({isWishlist}: MyBooksProps) => {
         </div>
     )
 }
-
-export default MyBooks

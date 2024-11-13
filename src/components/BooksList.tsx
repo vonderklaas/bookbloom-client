@@ -1,9 +1,9 @@
-import { LOADING_MESSAGES } from "../constants";
+import { LOADING_MESSAGES } from "../constants/constants";
 import { useUser } from "../context/UserContext";
-import { Book } from "../types";
-import BookCard from "./Book";
+import { Book } from "../types/types";
+import BookCard from "./BookCard";
 
-type ListOfBooksProps = {
+type BooksListProps = {
     isWishlist?: boolean; // New prop to indicate if we’re fetching wishlist books
     books: Book[]
     isProcessing: boolean;
@@ -12,7 +12,7 @@ type ListOfBooksProps = {
     selectedBook: Book | null;
 }
 
-export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, selectedBook, isWishlist }: ListOfBooksProps) => {
+export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, selectedBook, isWishlist }: BooksListProps) => {
 
     const { user } = useUser();
 
@@ -42,7 +42,7 @@ export const ListOfBooks = ({ books, isProcessing, openModal, setIsAddMode, sele
                         ) : (
                             <>
                                 {user?.id ? (
-                                    <button onClick={handleAddBook}>Add a book 📚</button>
+                                    <button onClick={handleAddBook}>{isWishlist ? 'Add a wish ✨' : 'Add a book 📚'}</button>
                                 ) : (
                                     <span>
                                         No user — no books.

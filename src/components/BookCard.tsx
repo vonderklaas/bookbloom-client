@@ -1,4 +1,4 @@
-import { Book } from '../types'
+import { Book } from '../types/types'
 
 type BookCardProps = {
     book: Book,
@@ -14,11 +14,13 @@ const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) 
         ${selectedBook?.id === book?.id ? (isWishlist ? 'active-book-wishlist' : 'active-book') : ''}
     `.trim();
 
+    console.log('book', book)
+
     return (
         <div className={className} onClick={() => openModal(book)}>
             <div className='book-card-wrapper' key={book.id}>
                 <div>
-                    <h3 className='book-card-title'>{book.title}</h3>
+                    <p className='book-card-title'>{book.title}</p>
                     <p className='book-card-author'>{book.author}</p>
                 </div>
                 <div className='book-card-year'>{book.year}</div>

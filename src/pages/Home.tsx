@@ -1,6 +1,7 @@
 import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
-import { API_PATH } from "../constants";
+import { API_PATH } from "../constants/constants";
+import toast from "react-hot-toast";
 
 export const Home = () => {
     const { user } = useUser();
@@ -17,7 +18,7 @@ export const Home = () => {
             const booksData = await booksResponse.json();
             setTotalBooks(booksData.total_books);
         } catch (error) {
-            console.error("Failed to fetch totals:", error);
+            toast.error(`Failed to fetch totals: ${error}`);
         }
     };
 
@@ -25,10 +26,6 @@ export const Home = () => {
         if (totalReaders === null || totalBooks === null) {
             fetchTotals();
         }
-        const intervalId = setInterval(fetchTotals, 300000);
-
-        return () => clearInterval(intervalId);
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -37,10 +34,8 @@ export const Home = () => {
             <h1>
                 Welcome, <span style={{ color: "orange" }}>{user?.id ? user?.username : 'wanderer'}</span>!
             </h1>
-            <br/>
             <p>Manage your book <b>collection</b> and keep track of your favorite reads.</p>
             <p>Add books to your <b>wishlist</b> so you never forget that exciting title you are dying to read.</p>
-            <br />
             <div className="stats">
                 <h2>Currently Tracking</h2>
                 {totalReaders ? (

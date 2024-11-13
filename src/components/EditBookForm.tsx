@@ -1,4 +1,4 @@
-import { Book } from "../types";
+import { Book } from "../types/types";
 
 type EditBookFormProps = {
     selectedBook: Book;
@@ -19,17 +19,18 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
 
         const title = formData.get('title') as string
         const author = formData.get('author') as string
+        const description = formData.get('description') as string
         const year = formData.get('year') as string
 
-        if (title && author && year) {
-            const newBook = { title, author, year }
+        if (title && author && year && description) {
+            const newBook = { title, author, description, year: parseInt(year), createdAt: selectedBook.createdAt }
             editBook(newBook, selectedBook.id)
         }
     }
 
     return (
         <div className="edit-book-form">
-            <h2>Edit Book</h2>
+            {/* <h2>Edit Book</h2> */}
             <form onSubmit={handleEdit}>
                 <label>
                     <span>Title</span>
@@ -40,6 +41,20 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                 <label>
                     <span>Author</span>
                     <input type='text' name='author' max={128} placeholder='Jack London' defaultValue={selectedBook.author} required />
+                    <br />
+                </label>
+                <br />
+                <label>
+                    <span>Description</span>
+                    <br />
+                    <textarea
+                        name='description'
+                        maxLength={256}
+                        placeholder='A story about...'
+                        defaultValue={selectedBook.description}
+                        cols={42}
+                        rows={5}
+                        required></textarea>
                     <br />
                 </label>
                 <br />

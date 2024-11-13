@@ -1,10 +1,34 @@
 :root {
+    --text-color: rgba(255, 255, 255, 0.87);
+    --link-color: #646cff;
+    --accent-color: orange;
+    --ai-color: rebeccapurple;
+
+    /* --background-color-dark: #242424;
+    --link-hover-color: orange;
+    --button-background-dark: #1a1a1a;
+    --background-color-light: #ffffff;
+    --button-background-light: #f9f9f9;
+    --modal-overlay-background: rgba(0, 0, 0, 0.85);
+    --border-color-active: orange;
+    --card-border-color: #747bff;
+    --card-hover-color: #747bff;
+    --wishlist-card-border-color: pink;
+    --wishlist-card-hover-color: pink;
+    --wishlist-card-text-hover-color: #000;
+    --header-text-color: #747bff;
+    --login-wrapper-shadow-color: #747bff;
+    --register-wrapper-shadow-color: #747bff;
+    --input-border-color: rebeccapurple; */
+}
+
+:root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
     font-size: 1.15rem;
+    line-height: 1.5;
     font-weight: 500;
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
+    color: var(--text-color);
     background-color: #242424;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -12,14 +36,23 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+a,
+.link {
     font-weight: 500;
-    color: #646cff;
+    color: var(--link-color);
     text-decoration: inherit;
+    cursor: pointer;
 }
 
+textarea {
+    resize: none;
+    width: 94%;
+    padding: 0.5rem;
+}
+
+.link:hover,
 a:hover {
-    color: orange;
+    color: var(--accent-color);
 }
 
 body {
@@ -34,8 +67,8 @@ h1 {
 button {
     border-radius: 0.5rem;
     border: 1px solid transparent;
-    padding: 0.6em 0.9rem;
-    font-size: 1rem;
+    padding: 0.6em 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     font-family: inherit;
     background-color: #1a1a1a;
@@ -44,27 +77,12 @@ button {
 }
 
 button:hover {
-    border-color: orange;
+    border-color: var(--accent-color);
 }
 
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-
-    a:hover {
-        color: orange;
-    }
-
-    button {
-        background-color: #f9f9f9;
-    }
 }
 
 .ReactModal__Overlay,
@@ -82,28 +100,26 @@ button:focus-visible {
     padding: 0 2rem;
 }
 
-@media screen and (max-width: 425px) {
-    .container {
-        padding: 0 1rem;
-    }
-}
-
 .books {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
-.book-card {
+.book-card,
+.book-card-wish {
     background-color: transparent;
-    border: 0.2rem solid #747bff;
     padding: 1rem;
     border-radius: 0.5rem;
-    width: 11rem;
-    height: 17rem;
+    width: 9rem;
+    height: 14rem;
     cursor: pointer;
     transition: all .15s;
+}
+
+.book-card {
+    border: 0.2rem solid #747bff;
 
     &:hover {
         background-color: #747bff;
@@ -111,34 +127,11 @@ button:focus-visible {
 }
 
 .book-card-wish {
-    background-color: transparent;
     border: 0.2rem solid pink;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    width: 12rem;
-    height: 17rem;
-    cursor: pointer;
-    transition: all .15s;
 
     &:hover {
         background-color: pink;
         color: #000;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .book-card,
-    .book-card-wish {
-        width: 10rem;
-        height: 15rem;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    .book-card,
-    .book-card-wish {
-        width: 8rem;
-        height: 12rem;
     }
 }
 
@@ -150,12 +143,8 @@ button:focus-visible {
 }
 
 .book-card-title {
-    color: orange;
+    color: var(--accent-color);
 }
-
-/* .book-card-author {
-    color: 
-} */
 
 .book-card-year {
     text-align: right;
@@ -171,7 +160,7 @@ button:focus-visible {
 }
 
 .active {
-    color: orange
+    color: var(--accent-color);
 }
 
 .header {
@@ -180,13 +169,7 @@ button:focus-visible {
     justify-content: space-between;
     margin: 0 auto;
     width: 100%;
-    margin-bottom: 3rem;
-}
-
-@media screen and (max-width: 768px) {
-    .header {
-        flex-direction: column;
-    }
+    margin-bottom: 5rem;
 }
 
 .header h2 {
@@ -202,6 +185,13 @@ button:focus-visible {
     margin: 2rem 0;
 }
 
+input {
+    min-width: 12rem;
+    padding: 0.3rem;
+    width: 95%;
+    font-size: 0.9rem;
+}
+
 .login-wrapper {
     margin: 3rem auto 0 auto;
     display: flex;
@@ -209,7 +199,6 @@ button:focus-visible {
     justify-content: center;
     border-radius: 0.5rem;
     padding: 1rem 0.5rem 1.6rem 0;
-    width: 300px;
     background-color: rgba(0, 0, 0, 0.60) !important;
     box-shadow: 2px 2px 25px #747bff;
 }
@@ -221,22 +210,152 @@ button:focus-visible {
     justify-content: center;
     border-radius: 0.5rem;
     padding: 1rem 0.5rem 1.6rem 0;
-    max-width: 300px;
     background-color: rgba(0, 0, 0, 0.60) !important;
     box-shadow: 2px 2px 25px #747bff;
 }
 
-input {
-    min-width: 12rem;
-    padding: 0.3rem;
-    width: 95%;
-    font-size: 0.9rem;
+.book-controls-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.add-book-form {
-    min-width: 300px;
+.book-controls-upper-title {
+    color: var(--accent-color);
 }
 
-.edit-book-form {
-    min-width: 300px;
+.flex-on-fields {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ai-button {
+    font-size: 13px;
+    padding: 0.3rem 0.6rem;
+}
+
+.ai-button {
+    border: 1px solid var(--ai-color) !important;
+    background-color: transparent;
+}
+
+.ai-button:disabled {
+    opacity: 0.3;
+    background-color: none;
+    cursor: not-allowed;
+}
+
+.ai-button:disabled:hover {
+    background-color: transparent;
+    border-color: var(--ai-color);
+}
+
+.ai-button:hover {
+    background-color: var(--ai-color);
+}
+
+.stats {
+    margin-top: 2rem;
+}
+
+/* SIZES */
+.login-wrapper,
+.register-wrapper,
+.add-book-form,
+.edit-book-form,
+.book-controls {
+    min-width: 370px;
+    max-width: 370px;
+}
+
+.book-controls-description {
+    max-width: 350px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .home h1 {
+        font-size: 3rem;
+    }
+
+    :root {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 0.5rem 0.6rem;
+    }
+
+    .login-wrapper,
+    .register-wrapper,
+    .add-book-form,
+    .edit-book-form,
+    .book-controls {
+        min-width: 320px;
+        max-width: 320px;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .book-card,
+    .book-card-wish {
+        width: 8rem;
+        height: 13rem;
+    }
+
+    .book-card h3,
+    .book-card-wish h3 {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
+    .books {
+        align-items: stretch;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .header {
+        margin-bottom: 3rem;
+    }
+
+    .login-wrapper,
+    .register-wrapper,
+    .add-book-form,
+    .edit-book-form,
+    .book-controls {
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .book-card,
+    .book-card-wish {
+        width: 7rem;
+        height: 11rem;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+
+    .link:hover,
+    a:hover {
+        color: var(--accent-color);
+    }
+
+    button {
+        background-color: #f9f9f9;
+    }
 }

@@ -1,8 +1,9 @@
-import { API_PATH } from "../constants";
+import { API_PATH } from "../constants/constants";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
-const Login = () => {
+export const Login = () => {
     const navigate = useNavigate();
 
     const { setUser } = useUser();
@@ -32,11 +33,11 @@ const Login = () => {
             .then((data) => {
                 console.log(data)
                 if (data.error === 'Invalid credentials') {
-                    alert('invalid credentials')
+                    toast.error('Invalid credentials, try again.')
                     return;
                 }
                 if (data.message === 'Logged in successfully') {
-                    alert('Logged in successfully')
+                    toast.success('Logged in successfully.')
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.username);
                     setUser({ id: data.user_id, username: data.username });
@@ -54,19 +55,15 @@ const Login = () => {
                 <h2>Login 🙋‍♂️</h2>
                 <form onSubmit={handleLogin}>
                     <label>
-                        <span>Email</span>
-                        <br />
-                        <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
-                        <br />
+                        <p>Email</p>
+                        <input type='email' name='email' placeholder='jack@hotmail.com' required />
                     </label>
-                    <br />
                     <label>
-                        <span>Password</span>
-                        <br />
-                        <input type='password' name='password' placeholder="******" required />
-                        <br />
+                        <p>Password</p>
+                        <input type='password' name='password' placeholder="********" required />
                     </label>
                     <br />
+                    <br/>
                     <button type='submit'>Login</button>
                     <br/>
                     <br/>
@@ -75,5 +72,3 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;

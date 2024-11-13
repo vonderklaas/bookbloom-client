@@ -1,8 +1,9 @@
-import { API_PATH } from "../constants";
+import toast from "react-hot-toast";
+import { API_PATH } from "../constants/constants";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+export const Register = () => {
     const navigate = useNavigate();
     const { setUser } = useUser();
 
@@ -32,11 +33,11 @@ const Register = () => {
             .then((data) => {
                 console.log(data)
                 if (data.error === 'Invalid credentials') {
-                    alert('invalid credentials')
+                    toast.error('Invalid credentials, try again.')
                     return;
                 }
                 if (data.message === 'Logged in successfully') {
-                    alert('Logged in successfully')
+                    toast.success('Logged in successfully.')
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.username);
                     setUser({ id: data.user_id, username: data.username });
@@ -65,11 +66,12 @@ const Register = () => {
             .then((data) => {
                 console.log(data)
                 if (data.error === 'User already exists') {
-                    alert('User already exists')
+                    toast.error('User already exists.')
                     return;
                 }
                 if (data.message === 'User registered successfully') {
-                    alert('User registered successfully')
+                    toast.success('User registered successfully.')
+                    toast('Let us authenticate you.')
                     loginUser(email, password);
                 }
             })
@@ -84,25 +86,20 @@ const Register = () => {
                 <h2>Register ✍️</h2>
                 <form onSubmit={handleRegister}>
                     <label>
-                        <span>Username</span>
-                        <br/>
-                        <input type='text' name='username' placeholder='jacklondon' required />
-                        <br />
+                        <p>Username</p>
+                        <input type='text' name='username' placeholder='jack' required />
                     </label>
                     <br/>
                     <label>
-                        <span>Email</span>
-                        <br/>
-                        <input type='email' name='email' placeholder='jacklondon@gmail.com' required />
-                        <br />
+                        <p>Email</p>
+                        <input type='email' name='email' placeholder='jack@hotmail.com' required />
                     </label>
                     <br/>
                     <label>
-                        <span>Password</span>
-                        <br/>
-                        <input type='password' name='password' placeholder="******" required />
-                        <br />
+                        <p>Password</p>
+                        <input type='password' name='password' placeholder="********" required />
                     </label>
+                    <br/>
                     <br/>
                     <button type='submit'>Register</button>
                     <br/>
@@ -112,5 +109,3 @@ const Register = () => {
         </div>
     );
 };
-
-export default Register;
