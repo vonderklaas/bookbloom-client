@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { LOADING_MESSAGES } from "../constants/constants";
 import { useUser } from "../context/UserContext";
 import { Book } from "../types/types";
@@ -28,17 +29,18 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
             {user?.id && books.length >= 1 && (
                 <button onClick={handleAddBook}>{isWishlist ? 'Add a wish' : 'Add a book'}</button>
             )}
-            <div className='books'>
+            <div>
+                <br/>
                 {!isProcessing ? (
                     <>
                         {books.length > 0 ? (
-                            <>
+                            <motion.div className='books' initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.2 }}>
                                 {books.map((book) => (
                                     <div key={book.id}>
                                         <BookCard book={book} openModal={openModal} selectedBook={selectedBook} isWishlist={isWishlist} />
                                     </div>
                                 ))}
-                            </>
+                            </motion.div>
                         ) : (
                             <>
                                 {user?.id ? (

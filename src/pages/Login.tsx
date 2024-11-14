@@ -2,6 +2,7 @@ import { API_PATH } from "../constants/constants";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import { motion } from "framer-motion"
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -49,25 +50,23 @@ export const Login = () => {
     };
 
     return (
-        <div className="login-wrapper">
-            <div>
+        <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.2 }}>
+            <div className="login-wrapper">
                 <h2>Login</h2>
                 <form onSubmit={handleLogin}>
-                    <label>
-                        <p>Email</p>
+                    <label className="form-row">
+                        <span>Email</span>
                         <input type='email' name='email' placeholder='jack@hotmail.com' required />
                     </label>
-                    <label>
-                        <p>Password</p>
+                    <label className="form-row">
+                        <span>Password</span>
                         <input type='password' name='password' placeholder="********" required />
                     </label>
-                    <br />
-                    <br/>
-                    <button type='submit'>Login</button>
-                    <br/>
-                    <br/>
+                    <div className="login-button">
+                        <button type='submit'>Login</button>
+                    </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 };

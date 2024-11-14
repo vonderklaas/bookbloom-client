@@ -16,7 +16,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     const [year, setYear] = useState('');
     const [isGeneratingDescription, setIsGeneratingDescription] = useState(false);
     const [isGeneratingYear, setIsGeneratingYear] = useState(false);
-  
+
     const currentYear = new Date().getFullYear();
     const minimumCharactersForInputs = 3;
 
@@ -32,6 +32,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     };
 
     const generateDescription = () => {
+        toast('Our model predicts the book description')
         setIsGeneratingDescription(true);
         setDescription('');
         const url = `${API_PATH}/generate-ai-description?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}`;
@@ -57,6 +58,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     };
 
     const generateYear = async () => {
+        toast('Our model predicts the publication year')
         setIsGeneratingYear(true);
         setYear('');
         try {
@@ -77,82 +79,82 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     };
 
     return (
-        <form className="add-book-form" onSubmit={handleSubmit}>
-            <label>
-                <p>Title</p>
-                <input
-                    type="text"
-                    name="title"
-                    minLength={4}
-                    maxLength={128}
-                    placeholder="Martin Eden"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                <p>Author</p>
-                <input
-                    type="text"
-                    name="author"
-                    minLength={4}
-                    maxLength={128}
-                    placeholder="Jack London"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    required
-                />
-            </label>
-            <div>
-                <div className="flex-on-fields">
-                    <p>Description</p>
-                    <button
-                        type="button"
-                        className="ai-button"
-                        onClick={generateDescription}
-                        disabled={isGeneratingDescription || description.length >= 1 || !title || title.length <= minimumCharactersForInputs || !author || author.length <= minimumCharactersForInputs}
-                    >
-                        {isGeneratingDescription ? "Generating..." : "Use AI"}
-                    </button>
+        <div className="add-book-form">
+            <h2>Add Book</h2>
+            <form onSubmit={handleSubmit}>
+                <label className="form-row">
+                    <span>Title</span>
+                    <input
+                        type="text"
+                        name="title"
+                        minLength={4}
+                        maxLength={128}
+                        placeholder="Martin Eden"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
+                </label>
+                <label className="form-row">
+                    <span>Author</span>
+                    <input
+                        type="text"
+                        name="author"
+                        minLength={4}
+                        maxLength={128}
+                        placeholder="Jack London"
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)}
+                        required
+                    />
+                </label>
+                <div className="form-row">
+                    <div className="flex-on-fields">
+                        <span>Description</span>
+                        <button
+                            type="button"
+                            className="ai-button"
+                            onClick={generateDescription}
+                            disabled={isGeneratingDescription || description.length >= 1 || !title || title.length <= minimumCharactersForInputs || !author || author.length <= minimumCharactersForInputs}
+                        >
+                            {isGeneratingDescription ? "Generating..." : "Use AI"}
+                        </button>
+                    </div>
+                    <textarea
+                        name="description"
+                        maxLength={256}
+                        placeholder="This is a story about..."
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        cols={36}
+                        rows={5}
+                    ></textarea>
                 </div>
-                <textarea
-                    name="description"
-                    maxLength={256}
-                    placeholder="This is a story about..."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                    cols={36}
-                    rows={5}
-                ></textarea>
-            </div>
-            <div>
-                <div className="flex-on-fields">
-                    <p>Publication Year</p>
-                    <button
-                        className="ai-button"
-                        type="button"
-                        onClick={generateYear}
-                        disabled={isGeneratingYear || year.length >= 1 || !title || title.length <= minimumCharactersForInputs || !author || author.length <= minimumCharactersForInputs || !description || description.length <= minimumCharactersForInputs}
-                    >
-                        {isGeneratingYear ? "Generating..." : "Use AI"}
-                    </button>
+                <div className="flex-row">
+                    <div className="flex-on-fields">
+                        <span>Publication Year</span>
+                        <button
+                            className="ai-button"
+                            type="button"
+                            onClick={generateYear}
+                            disabled={isGeneratingYear || year.length >= 1 || !title || title.length <= minimumCharactersForInputs || !author || author.length <= minimumCharactersForInputs || !description || description.length <= minimumCharactersForInputs}
+                        >
+                            {isGeneratingYear ? "Generating..." : "Use AI"}
+                        </button>
+                    </div>
+                    <input
+                        type="number"
+                        name="year"
+                        max={currentYear}
+                        placeholder="1909"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        required
+                    />
                 </div>
-                <input
-                    type="number"
-                    name="year"
-                    max={currentYear}
-                    placeholder="1909"
-                    value={year}
-                    onChange={(e) => setYear(e.target.value)}
-                    required
-                />
-            </div>
-            <br />
-            <button type="submit" disabled={isGeneratingYear || isGeneratingDescription || !title || !author || !description || !year}>Add</button>
-        </form>
+                <button className="add-buttons" type="submit" disabled={isGeneratingYear || isGeneratingDescription || !title || !author || !description || !year}>Add</button>
+            </form>
+        </div>
     );
 };
-
-// AI Cases - suggest (wishlist) books based on your collection

@@ -44,6 +44,7 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
     };
 
     const deleteBook = async ({ id }: Book) => {
+        toast('Removing book')
         setIsProcessing(true);
         closeModal();
         const response = await fetch(`${API_PATH}/books/${id}?user_id=${user?.id}`, {
@@ -111,8 +112,21 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
         setIsAddMode(false)
     };
 
+    const handleWishlistSuggestions = () => {
+        toast('This feature is still in development.')
+    }
+
     return (
         <div className='content'>
+            {isWishlist && (
+                <>
+                    <button className='ai-button' onClick={handleWishlistSuggestions}>
+                        Get AI Book Suggestions
+                    </button>
+                    <br />
+                    <br/>
+                </>
+            )}
             <BooksList
                 books={books}
                 openModal={openModal}

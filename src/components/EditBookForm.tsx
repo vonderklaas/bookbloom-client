@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { Book } from "../types/types";
 
 type EditBookFormProps = {
@@ -24,29 +25,25 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
 
         if (title && author && year && description) {
             const newBook = { title, author, description, year: parseInt(year), createdAt: selectedBook.createdAt }
+            toast('Saving new details.')
             editBook(newBook, selectedBook.id)
         }
     }
 
     return (
         <div className="edit-book-form">
-            {/* <h2>Edit Book</h2> */}
+            <h2>Edit Book</h2>
             <form onSubmit={handleEdit}>
-                <label>
-                    <span>Title</span>
+                <label className="form-row">
+                    <span>Book Title</span>
                     <input type='text' name='title' max={128} placeholder='Martin Eden' defaultValue={selectedBook.title} required />
-                    <br />
                 </label>
-                <br />
-                <label>
+                <label className="form-row">
                     <span>Author</span>
                     <input type='text' name='author' max={128} placeholder='Jack London' defaultValue={selectedBook.author} required />
-                    <br />
                 </label>
-                <br />
-                <label>
+                <label className="form-row">
                     <span>Description</span>
-                    <br />
                     <textarea
                         name='description'
                         maxLength={256}
@@ -55,16 +52,12 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                         cols={42}
                         rows={5}
                         required></textarea>
-                    <br />
                 </label>
-                <br />
-                <label>
-                    <span>Year</span>
+                <label className="form-row">
+                    <span>Publication Year</span>
                     <input type='number' name='year' max={currentYear} placeholder='1909' defaultValue={selectedBook.year} required />
-                    <br />
                 </label>
-                <br />
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div className="form-row edit-buttons">
                     <button type='submit'>Save</button>
                     <button type='button' onClick={closeModal}>Discard</button>
                 </div>
