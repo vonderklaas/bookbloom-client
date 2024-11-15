@@ -1,0 +1,26 @@
+.book-controls  {
+    min-width: 370px;
+    max-width: 370px;
+}
+
+.book-controls-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.book-controls-upper-title {
+    margin: 0;
+}
+
+.book-controls-description {
+    max-width: 350px;
+}
+
+.book-controls-buttons {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

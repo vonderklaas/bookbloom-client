@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
-import { Book } from "../types/types";
+import { Book } from "../../types/types";
+import './EditBookForm.css'
 
 type EditBookFormProps = {
     selectedBook: Book;
@@ -32,7 +33,7 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
 
     return (
         <div className="edit-book-form">
-            <h2>Edit Book</h2>
+            <h2 className="edit-book-form-title">Edit Book</h2>
             <form onSubmit={handleEdit}>
                 <label className="form-row">
                     <span>Book Title</span>
@@ -49,9 +50,10 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                         maxLength={256}
                         placeholder='A story about...'
                         defaultValue={selectedBook.description}
-                        cols={42}
-                        rows={5}
-                        required></textarea>
+                        required
+                        cols={30}
+                        rows={4}
+                    ></textarea>
                 </label>
                 <label className="form-row">
                     <span>Publication Year</span>
@@ -59,7 +61,7 @@ export const EditBookForm: React.FC<EditBookFormProps> = ({ selectedBook, editBo
                 </label>
                 <div className="form-row edit-buttons">
                     <button type='submit'>Save</button>
-                    <button type='button' onClick={closeModal}>Discard</button>
+                    <button type='button' onClick={closeModal}>Cancel</button>
                 </div>
             </form>
         </div>

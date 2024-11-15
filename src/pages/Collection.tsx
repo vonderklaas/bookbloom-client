@@ -1,12 +1,12 @@
 import Modal from 'react-modal';
 import { useEffect, useState } from 'react'
 import { Book } from '../types/types';
-import { EditBookForm } from '../components/EditBookForm';
-import { AddBookForm } from '../components/AddBookForm';
+import { EditBookForm } from '../components/EditBookForm/EditBookForm';
+import { AddBookForm } from '../components/AddBookForm/AddBookForm';
 import { BooksList } from '../components/BooksList';
 import { API_PATH, modalStyles } from '../constants/constants';
 import { useUser } from '../context/UserContext';
-import { BookControls } from '../components/BookControls';
+import { BookControls } from '../components/BookControls/BookControls';
 import toast from 'react-hot-toast';
 
 type CollectionProps = {
@@ -112,13 +112,13 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
         setIsAddMode(false)
     };
 
-    const handleWishlistSuggestions = () => {
-        toast('This feature is still in development.')
-    }
+    // const handleWishlistSuggestions = () => {
+    //     toast('Not ready yet, will keep you updated!')
+    // }
 
     return (
-        <div className='content'>
-            {isWishlist && (
+        <div>
+            {/* {isWishlist && (
                 <>
                     <button className='ai-button' onClick={handleWishlistSuggestions}>
                         Get AI Book Suggestions
@@ -126,7 +126,7 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
                     <br />
                     <br/>
                 </>
-            )}
+            )} */}
             <BooksList
                 books={books}
                 openModal={openModal}
@@ -134,6 +134,7 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
                 setIsAddMode={setIsAddMode}
                 selectedBook={selectedBook}
                 isWishlist={isWishlist}
+                fetchBooksOrWishlist={fetchBooksOrWishlist}
             />
             {modalIsOpen && (
                 <Modal

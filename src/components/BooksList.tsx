@@ -3,17 +3,19 @@ import { LOADING_MESSAGES } from "../constants/constants";
 import { useUser } from "../context/UserContext";
 import { Book } from "../types/types";
 import BookCard from "./BookCard";
+import toast from "react-hot-toast";
 
 type BooksListProps = {
-    isWishlist?: boolean; // New prop to indicate if we’re fetching wishlist books
+    isWishlist?: boolean;
     books: Book[]
     isProcessing: boolean;
     openModal: (book?: Book) => void;
     setIsAddMode: React.Dispatch<React.SetStateAction<boolean>>;
     selectedBook: Book | null;
+    fetchBooksOrWishlist: () => void;
 }
 
-export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, selectedBook, isWishlist }: BooksListProps) => {
+export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, selectedBook, isWishlist, fetchBooksOrWishlist }: BooksListProps) => {
 
     const { user } = useUser();
 
@@ -24,42 +26,49 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
         openModal();
     }
 
+    if (!user?.id) {
+        toast('Please auth first')
+        return;
+    }
+
     return (
         <>
-            {user?.id && books.length >= 1 && (
-                <button onClick={handleAddBook}>{isWishlist ? 'Add a wish' : 'Add a book'}</button>
+            <div className="book-list-title-wrapper">
+                <h2 className={isWishlist ? 'highlight highlight-yellow' : 'highlight highlight-green'}>{isWishlist ? 'Wishlist' : 'Collection'}</h2>
+                <button disabled={isProcessing} onClick={fetchBooksOrWishlist} className="button-refresh">↻</button>
+            </div>
+            <br />
+            {user?.id && (
+                <>
+                    {isWishlist ? (
+                        <button className="button-add-wish" onClick={handleAddBook}>Add a wish</button>
+                    ) : (
+                        <button className="button-add-collection" onClick={handleAddBook}>Add a book</button>
+                    )}
+                </>
             )}
-            <div>
-                <br/>
+            <>
                 {!isProcessing ? (
-                    <>
+                    <div>
                         {books.length > 0 ? (
-                            <motion.div className='books' initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.2 }}>
+                            <div className="books">
                                 {books.map((book) => (
                                     <div key={book.id}>
                                         <BookCard book={book} openModal={openModal} selectedBook={selectedBook} isWishlist={isWishlist} />
                                     </div>
                                 ))}
-                            </motion.div>
+                            </div>
                         ) : (
-                            <>
-                                {user?.id ? (
-                                    <div>
-                                        <button onClick={handleAddBook}>{isWishlist ? 'Add a wish' : 'Add a book'}</button>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <p>
-                                            No user — no books.
-                                        </p>
-                                        <p>Authenticate and come back!</p>
-                                    </div>
-                                )}
-                            </>
+                            <div className="no-books-wrapper">
+                                <img className="book-add-pointer" src='/public/arrow.png' alt='Add Book' />
+                            </div>
                         )}
-                    </>
-                ) : <div>{randomMessage}</div>}
-            </div>
+                    </div>
+                ) : <div className="spinner">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>{randomMessage}</motion.div>
+                </div>
+                }
+            </>
         </>
     )
 }

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Book } from "../types/types";
-import { API_PATH } from "../constants/constants";
+import { Book } from "../../types/types";
+import { API_PATH } from "../../constants/constants";
 import toast from "react-hot-toast";
+import './AddBookForm.css'
 
 type AddBookFormProps = {
     addBook: (book: Book) => void;
@@ -23,7 +24,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (title && author && year) {
+        if (title && author && description && year) {
             const newBook = { title, author, year: parseInt(year), description, createdAt: new Date() };
             addBook(newBook);
             closeModal();
@@ -80,14 +81,14 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
 
     return (
         <div className="add-book-form">
-            <h2>Add Book</h2>
+            <h2 className="add-book-form-title">Add Book</h2>
             <form onSubmit={handleSubmit}>
                 <label className="form-row">
-                    <span>Title</span>
+                    <span>Book Title</span>
                     <input
                         type="text"
                         name="title"
-                        minLength={4}
+                        minLength={minimumCharactersForInputs}
                         maxLength={128}
                         placeholder="Martin Eden"
                         value={title}
@@ -100,7 +101,7 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
                     <input
                         type="text"
                         name="author"
-                        minLength={4}
+                        minLength={minimumCharactersForInputs}
                         maxLength={128}
                         placeholder="Jack London"
                         value={author}
@@ -120,15 +121,19 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
                             {isGeneratingDescription ? "Generating..." : "Use AI"}
                         </button>
                     </div>
+                    {description.length < 1 && (
+                        <small className="small-text">Description is generated based on title and author.</small>
+                    )}
                     <textarea
                         name="description"
                         maxLength={256}
-                        placeholder="This is a story about..."
+                        minLength={minimumCharactersForInputs}
+                        placeholder="A story about..."
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
-                        cols={36}
-                        rows={5}
+                        cols={30}
+                        rows={4}
                     ></textarea>
                 </div>
                 <div className="flex-row">
@@ -143,6 +148,9 @@ export const AddBookForm: React.FC<AddBookFormProps> = ({ addBook, closeModal, s
                             {isGeneratingYear ? "Generating..." : "Use AI"}
                         </button>
                     </div>
+                    {description.length < 1 && (
+                        <small className="small-text">Publication year is generated based on all the above.</small>
+                    )}
                     <input
                         type="number"
                         name="year"

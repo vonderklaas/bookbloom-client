@@ -31,24 +31,24 @@ export const Header = () => {
         navigate('/')
     }
 
-    const isActive = (path: string) => location.pathname.includes(path);
+    const isActive = (path: string) => location.pathname === `/${path}` || (path === '' && location.pathname === '/');
 
     return (
         <header className="header">
             <Link to={`/`}>
-                <p>bookbloom</p>
+                <h3 className={isActive('/') ? 'highlight highlight-pink' : ''}>bookbloom</h3>
             </Link>
             <>
                 {!user ? (
                     <nav style={{ display: 'flex', gap: '1.5rem' }}>
-                        <Link to={`login`} className={isActive('login') ? 'active' : ''}>Login</Link>
-                        <Link to={`register`} className={isActive('register') ? 'active' : ''}>Register</Link>
+                        <Link to={`register`} className={isActive('register') ? 'highlight highlight-pink' : ''}>Register</Link>
+                        <Link to={`login`} className={isActive('login') ? 'highlight highlight-pink' : ''}>Login</Link>
                     </nav>
                 ) : (
                     <nav style={{ display: 'flex', gap: '1.5rem' }}>
-                        <Link to={`collection`} className={isActive('collection') ? 'active' : ''}>Collection</Link>
-                        <Link to={`wishlist`} className={isActive('wishlist') ? 'active' : ''}>Wishlist</Link>
-                        <span className="link" onClick={logout}>Logout</span>
+                        <Link to={`collection`} className={isActive('collection') ? 'highlight highlight-green' : ''}>Collection</Link>
+                        <Link to={`wishlist`} className={isActive('wishlist') ? 'highlight highlight-yellow' : ''}>Wishlist</Link>
+                        <span className="fake-link" onClick={logout}>Log out</span>
                     </nav>
                 )}
             </>

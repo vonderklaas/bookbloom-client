@@ -1,4 +1,5 @@
-import { Book } from '../types/types';
+import { Book } from '../../types/types';
+import './BookControls.css'
 
 type BookControlsProps = {
     selectedBook: Book;
@@ -11,14 +12,12 @@ export const BookControls = ({ selectedBook, closeModal, openEditMode, deleteBoo
     return (
         <div className='book-controls'>
             <div className='book-controls-upper'>
-                <span className='book-controls-upper-title'>{selectedBook.title}</span>
+                <h2 className='book-controls-upper-title'>{selectedBook.title}</h2>
                 <button onClick={closeModal}>&times;</button>
             </div>
             <p className='book-controls-description'>{selectedBook.description}</p>
-            <small>Published by {selectedBook.author} at {selectedBook.year}</small>
-            <br />
-            <br />
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <small>Published at {selectedBook.year}</small>
+            <div className='book-controls-buttons'>
                 <button onClick={openEditMode}>Update details</button>
                 <button onClick={() => deleteBook(selectedBook)}>Remove book</button>
             </div>
