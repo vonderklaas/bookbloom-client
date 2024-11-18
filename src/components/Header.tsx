@@ -24,7 +24,7 @@ export const Header = () => {
     }, [])
 
     const logout = () => {
-        toast('User logged out.');
+        toast('Logged out successfully.');
         localStorage.removeItem('user_id');
         localStorage.removeItem('username');
         setUser(null);
@@ -41,14 +41,15 @@ export const Header = () => {
             <>
                 {!user ? (
                     <nav style={{ display: 'flex', gap: '1.5rem' }}>
-                        <Link to={`register`} className={isActive('register') ? 'highlight highlight-pink' : ''}>Register</Link>
-                        <Link to={`login`} className={isActive('login') ? 'highlight highlight-pink' : ''}>Login</Link>
+                        <Link to={`register`} className={isActive('register') ? 'highlight highlight-blue' : ''}>Register</Link>
+                        <Link to={`login`} className={isActive('login') ? 'highlight highlight-blue' : ''}>Login</Link>
                     </nav>
                 ) : (
                     <nav style={{ display: 'flex', gap: '1.5rem' }}>
                         <Link to={`collection`} className={isActive('collection') ? 'highlight highlight-green' : ''}>Collection</Link>
                         <Link to={`wishlist`} className={isActive('wishlist') ? 'highlight highlight-yellow' : ''}>Wishlist</Link>
-                        <span className="fake-link" onClick={logout}>Log out</span>
+                        <Link to={`recommendations`} className={isActive('recommendations') ? 'highlight highlight-pink' : ''}>Recommendations</Link>
+                        <span className="logout" onClick={logout}>Log out</span>
                     </nav>
                 )}
             </>

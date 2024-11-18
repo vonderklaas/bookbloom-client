@@ -18,17 +18,18 @@ export const Home = () => {
                     <>
                         {!user?.id ? (
                             <h1>
-                                Your first <span className="highlight highlight-pink">AI-enhanced</span> digital library
+                                Your first <span className="highlight highlight-gray">AI-enhanced</span> digital library
                             </h1>
 
                         ) : (
                             <h1>
-                                Welcome, <span className="highlight highlight-pink">{user?.username}</span>!
+                                Welcome, <span className="highlight highlight-blue">{user?.username}</span>!
                             </h1>
                         )}
                     </>
-                    <p>Organize your <span className="highlight highlight-green">collection</span> and track favorite reads.</p>
-                    <p>Add titles to your <span className="highlight highlight-yellow">wishlist</span> to save them for later.</p>
+                    <p>Organize your <span className="highlight highlight-green">collection</span> and keep track of your favorite reads.</p>
+                    <p>Add titles to your <span className="highlight highlight-yellow">wishlist</span> and save them for later.</p>
+                    <p>Unlock smart <span className="highlight highlight-pink">AI recommendations</span> based on your reading habits.</p>
                     {!user?.id && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 4, duration: 0.5 }}>
                             <p>So? <span className="highlight highlight-blue"><Link to='/register'>Create an account</Link></span>!</p>

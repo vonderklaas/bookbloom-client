@@ -6,10 +6,14 @@ import { UserProvider } from "./context/UserContext.tsx";
 import { Login } from "./pages/Login.tsx";
 import { Register } from "./pages/Register.tsx";
 import { Collection } from "./pages/Collection.tsx";
+import { Recommendations } from "./pages/Recommendations.tsx";
 import { Home } from "./pages/Home.tsx";
 import { Toaster } from "react-hot-toast";
 
 import "./index.css";
+import { Author } from "./pages/Author.tsx";
+import { Support } from "./pages/Support.tsx";
+import { TermsAndConditions } from "./pages/TermsAndConditions.tsx";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +39,22 @@ const router = createBrowserRouter([
             {
                 path: "wishlist",
                 element: <Collection isWishlist={true} />,
+            },
+            {
+                path: "recommendations",
+                element: <Recommendations />,
+            },
+            {
+                path: "author",
+                element: <Author />,
+            },
+            {
+                path: "support",
+                element: <Support />,
+            },
+            {
+                path: "terms-and-conditions",
+                element: <TermsAndConditions />,
             },
             {
                 path: "*",

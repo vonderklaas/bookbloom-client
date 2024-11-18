@@ -24,11 +24,10 @@ const BookCard = ({ book, openModal, selectedBook, isWishlist }: BookCardProps) 
                     </div>
                     <div className='book-card-footer-wrapper'>
                         <div title={isWishlist ? 'Wishlist' : 'Collection'}>{isWishlist ? '✨' : '📖'}</div>
-                        <small className='book-card-year'>{book.year}</small>
+                        {/* <small className='book-card-year'>{book.year}</small> */}
                     </div>
                 </div>
             </div>
-
         </motion.div>
     )
 }

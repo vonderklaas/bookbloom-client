@@ -1,0 +1,17 @@
+.button-add-wish {
+    background: var(--highlight-yellow) !important;
+}
+
+.button-add-collection {
+    background: var(--highlight-green) !important;
+}
+
+.button-ai-recommendations {
+    background: var(--highlight-pink) !important;
+}
+
+.button-recommendations-tooltip {
+    background: var(--highlight-pink) !important;
+    padding: 0.25rem 0.5rem;
+    margin-top: 0.2rem;
+}

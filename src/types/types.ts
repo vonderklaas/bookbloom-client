@@ -3,7 +3,6 @@ export type Book = {
     title: string;
     author: string;
     description?: string;
-    year: number;
-    fromWishlist?: boolean;
-    createdAt: Date;
+    from_wishlist?: boolean;
+    created_at: Date;
 }

@@ -1,8 +1,6 @@
 :root {
-    --text-color: #333333;
+    --text-color: rgba(#333333, 0.5);
     --text-color-disabled: rgba(16, 16, 16, 0.3);
-    --link-text-color: #80ba6b;
-    --text-accent-color: #80ba6b;
     --main-background-color: #F0F2F5;
 
     --color-white: #fff;
@@ -12,6 +10,7 @@
     --highlight-pink: #f4d2d2;
     --highlight-blue: #d2e4ff;
     --highlight-yellow: #fdf4d2;
+    --highlight-gray: #0000001d;
 
     --box-shadow: rgba(0, 0, 0, 0.05);
 }
@@ -30,13 +29,17 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-a,
-.fake-link {
+a {
     color: var(--text-color);
     font-weight: 500;
     cursor: pointer;
     text-decoration: inherit;
     transition: all .15s;
+}
+
+.fake-link {
+    text-decoration: none;
+    font-weight: bold;
 }
 
 body {
@@ -94,7 +97,9 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
-.login-wrapper {
+.login-wrapper,
+.author-wrapper,
+.support-wrapper {
     margin: 3rem auto 0 auto;
     border-radius: 0.5rem;
     padding: 2rem;
@@ -104,28 +109,12 @@ h1 {
     margin: 3rem auto 0 auto;
     border-radius: 0.5rem;
     padding: 2rem;
-}
-
-.ai-button {
-    color: var(--text-color);
-    font-size: 13px;
-    padding: 0.3rem 0.6rem;
-    background-color: var(--highlight-pink);
-}
-
-.ai-button:disabled {
-    background-color: var(--highlight-pink);
-    color: var(--text-color-disabled);
-    cursor: not-allowed;
-}
-
-.ai-button:disabled:hover {
-    color: var(--text-color-disabled);
-    background-color: var(--highlight-pink);
 }
 
 .login-wrapper,
-.register-wrapper {
+.register-wrapper,
+.author-wrapper,
+.support-wrapper {
     min-width: 370px;
     max-width: 370px;
 }
@@ -170,6 +159,10 @@ h1 {
 
 .highlight-yellow::before {
     background-color: var(--highlight-yellow);
+}
+
+.highlight-gray::before {
+    background-color: var(--highlight-gray);
 }
 
 .greetings-arrow {
@@ -275,6 +268,10 @@ button:focus-visible {
     box-shadow: 2px 4px 6px var(--highlight-yellow);
 }
 
+.book-suggested {
+    box-shadow: 2px 4px 6px var(--highlight-pink);
+}
+
 .book-card-wrapper {
     display: flex;
     flex-direction: column;
@@ -325,20 +322,26 @@ button:focus-visible {
     background-color: var(--main-background-color) !important;
 }
 
-.small-text {
-    font-size: 0.7rem;
+.footer {
+    position: fixed;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--main-background-color) !important;
+    border-top: 1px solid var(--main-background-color);
+    bottom: 0;
+    width: calc(100% - 3rem);
+    padding: 0.6rem 1.5rem;
 }
 
-.button-add-wish {
-    background: var(--highlight-yellow) !important;
-}
-
-.button-add-collection {
-    background: var(--highlight-green) !important;
+.footer-links {
+    display: flex;
+    gap: 1rem;
 }
 
 /* MEDIA */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
 
     .home h1 {
         font-size: 3rem;
@@ -402,4 +405,8 @@ button:focus-visible {
         width: 7rem;
         height: 11rem;
     }
+} */
+
+.logout {
+    cursor: pointer;
 }

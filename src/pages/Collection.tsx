@@ -44,7 +44,7 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
     };
 
     const deleteBook = async ({ id }: Book) => {
-        toast('Removing book')
+        toast('Removing the book.');
         setIsProcessing(true);
         closeModal();
         const response = await fetch(`${API_PATH}/books/${id}?user_id=${user?.id}`, {
@@ -81,7 +81,7 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...newBook, user_id: user?.id, fromWishlist: isWishlist }),
+                body: JSON.stringify({ ...newBook, user_id: user?.id, from_wishlist: isWishlist }),
             });
             if (!response.ok) {
                 toast.error("Failed to add the book. Please try again.");
@@ -111,22 +111,9 @@ export const Collection = ({ isWishlist }: CollectionProps) => {
         setSelectedBook(null)
         setIsAddMode(false)
     };
-
-    // const handleWishlistSuggestions = () => {
-    //     toast('Not ready yet, will keep you updated!')
-    // }
-
+    
     return (
         <div>
-            {/* {isWishlist && (
-                <>
-                    <button className='ai-button' onClick={handleWishlistSuggestions}>
-                        Get AI Book Suggestions
-                    </button>
-                    <br />
-                    <br/>
-                </>
-            )} */}
             <BooksList
                 books={books}
                 openModal={openModal}

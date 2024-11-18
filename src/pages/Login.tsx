@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import { motion } from "framer-motion"
 import { useState } from "react";
+import { Button } from "../components/Button/Button";
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -66,7 +67,7 @@ export const Login = () => {
     return (
         <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.2 }}>
             <div className="login-wrapper">
-                <h2 className="highlight highlight-pink">Login</h2>
+                <h2 className="highlight highlight-blue">Login</h2>
                 <form onSubmit={handleLogin}>
                     <label className="form-row">
                         <span>Email</span>
@@ -77,7 +78,11 @@ export const Login = () => {
                         <input type='password' name='password' required />
                     </label>
                     <div className="login-button">
-                        <button disabled={isLoading} type='submit'>{isLoading ? 'Loading...' : 'Submit'}</button>
+                        <Button
+                            isDisabled={isLoading}
+                            type='submit'
+                            text={isLoading ? "Loading..." : 'Submit'}
+                        />
                     </div>
                 </form>
             </div>
