@@ -1,7 +1,8 @@
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import { motion } from "framer-motion"
-import Stats from "../components/Stats/Stats";
+import Stats from "../../components/Stats/Stats";
 import { Link } from "react-router-dom";
+import './Home.css'
 
 export const Home = () => {
     const { user } = useUser();

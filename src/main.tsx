@@ -1,19 +1,18 @@
 import Modal from "react-modal";
 import App from "./App.tsx";
 import { createRoot } from "react-dom/client";
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { UserProvider } from "./context/UserContext.tsx";
 import { Login } from "./pages/Login.tsx";
 import { Register } from "./pages/Register.tsx";
 import { Collection } from "./pages/Collection.tsx";
 import { Recommendations } from "./pages/Recommendations.tsx";
-import { Home } from "./pages/Home.tsx";
-import { Toaster } from "react-hot-toast";
-
-import "./index.css";
+import { Home } from "./pages/Home/Home.tsx";
+import { TermsAndConditions } from "./pages/TermsAndConditions.tsx";
 import { Author } from "./pages/Author.tsx";
 import { Support } from "./pages/Support.tsx";
-import { TermsAndConditions } from "./pages/TermsAndConditions.tsx";
+import "./index.css";
 
 const router = createBrowserRouter([
     {

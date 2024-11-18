@@ -1,0 +1,14 @@
+.home {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* @media only screen and (max-width: 991px) {
+    .home {
+        padding: 0;
+    }
+} */

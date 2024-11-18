@@ -3,3 +3,7 @@
 - [ ] Come up with cleaner CSS organisation
 - [ ] Come up favicon
 - [ ] Come up with code optimisation
+
+
+- [ ] Full responsive design for all website
+- [ ] Create AI summaries block

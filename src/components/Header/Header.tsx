@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
+import { useUser } from "../../context/UserContext";
 import toast from "react-hot-toast";
+import './Header.css'
 
 export const Header = () => {
 
@@ -35,8 +36,9 @@ export const Header = () => {
 
     return (
         <header className="header">
-            <Link to={`/`}>
-                <h3 className={isActive('/') ? 'highlight highlight-pink' : ''}>bookbloom</h3>
+            <Link className="header-mobile-wrapper" to={`/`}>
+                <h3 className="header-title">bookbloom</h3>
+                <span className="mobile-logout" onClick={logout}>Log out</span>
             </Link>
             <>
                 {!user ? (

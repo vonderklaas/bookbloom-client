@@ -41,6 +41,41 @@ export const Recommendations: React.FC = () => {
         }
     };
 
+    const addToWishlist = async (title: string, author: string) => {
+        setIsLoading(true);
+        const newBook = { title, author };
+        console.log(newBook);
+
+        try {
+            const response = await fetch(`${API_PATH}/add`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...newBook, created_at: new Date(), user_id: user?.id, from_wishlist: true }),
+            });
+
+            if (!response.ok) {
+                toast.error("Failed to add the book. Please try again.");
+            } else {
+                // Remove the book from the recommendations array
+                setRecommendations((prevRecommendations) =>
+                    prevRecommendations.filter(
+                        (book) => !(book.title === title && book.author === author)
+                    )
+                );
+
+                // Show a success toast
+                toast.success("Book added to your wishlist!");
+            }
+        } catch (error) {
+            console.error("Error adding book to wishlist:", error);
+            toast.error("An error occurred while adding the book. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     // Function to fetch AI suggestions
     const fetchRecommendations = async () => {
         if (books.length === 0) {
@@ -50,7 +85,7 @@ export const Recommendations: React.FC = () => {
 
         setIsLoading(true);
         setRecommendations([]);
-        toast(`Fetching recommendations for ${books.length} books.`);
+        toast(`Fetching recommendations for you...`);
         try {
             const response = await fetch(`${API_PATH}/generate-ai-titles`, {
                 method: "POST",
@@ -111,14 +146,12 @@ export const Recommendations: React.FC = () => {
             )}
 
             {recommendations.length === 0 && (
-                <>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <br />
                     <br />
                     <Tip marginLeft text="Our AI model analyzes your collection and wishlist to recommend books you'll enjoy." />
-                    {books.length < 3 && (
-                        <Tip marginLeft text='Please add at least 3 books to get personalized suggestions.' />
-                    )}
-                </>
+                    <Tip marginLeft text='Add at least 3 books to get personalized suggestions.' />
+                </motion.div>
             )}
 
             <div className="books">
@@ -135,6 +168,7 @@ export const Recommendations: React.FC = () => {
                                         <Button
                                             className="button-add-wish"
                                             text='To wishlist ✨'
+                                            onClick={() => addToWishlist(recommendation.title, recommendation.author)}
                                         />
                                     </div>
                                 </div>

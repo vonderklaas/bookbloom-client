@@ -29,6 +29,13 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+@media only screen and (max-width: 768px) {
+    :root {
+        font-size: 1rem;
+    }
+}
+
+
 a {
     color: var(--text-color);
     font-weight: 500;
@@ -57,18 +64,10 @@ h1 {
     padding: 0 2rem;
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    padding: 0 2rem;
-}
-
-.header nav {
-    display: flex;
-    gap: 2rem;
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
 }
 
 .form-row {
@@ -81,14 +80,6 @@ h1 {
     margin-bottom: 0.3rem;
 }
 
-.register-buttons,
-.login-buttons,
-.add-buttons,
-.edit-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
 
 .flex-on-fields {
     display: flex;
@@ -117,15 +108,6 @@ h1 {
 .support-wrapper {
     min-width: 370px;
     max-width: 370px;
-}
-
-.home {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
 }
 
 .highlight {
@@ -193,29 +175,7 @@ input {
     border-radius: 0.25rem;
 }
 
-button {
-    border-radius: 0.5rem;
-    border: 1px solid transparent;
-    padding: 0.6em 0.8rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: var(--color-white);
-    cursor: pointer;
-    transition: all 0.25s;
-}
 
-button:disabled:hover {
-    background-color: var(--color-white);
-    color: var(--color-black);
-    opacity: 0.5;
-}
-
-button:focus,
-button:focus-visible {
-    outline: none;
-    appearance: none;
-}
 
 .spinner {
     position: absolute;
@@ -299,16 +259,6 @@ button:focus-visible {
     gap: 1rem;
 }
 
-.button-refresh {
-    padding: 0;
-    background: none;
-    font-size: 1.4rem;
-    margin-top: 0.3rem;
-}
-
-.button-refresh:disabled {
-    background: none !important;
-}
 
 .ReactModal__Overlay,
 .ReactModal__Overlay--after-open {
@@ -322,90 +272,6 @@ button:focus-visible {
     background-color: var(--main-background-color) !important;
 }
 
-.footer {
-    position: fixed;
-    display: block;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--main-background-color) !important;
-    border-top: 1px solid var(--main-background-color);
-    bottom: 0;
-    width: calc(100% - 3rem);
-    padding: 0.6rem 1.5rem;
-}
-
-.footer-links {
-    display: flex;
-    gap: 1rem;
-}
-
-/* MEDIA */
-/* @media screen and (max-width: 768px) {
-
-    .home h1 {
-        font-size: 3rem;
-    }
-
-    :root {
-        font-size: 1rem;
-    }
-
-    button {
-        padding: 0.5rem 0.6rem;
-    }
-
-    .login-wrapper,
-    .register-wrapper {
-        min-width: 320px;
-        max-width: 320px;
-    }
-
-    .header {
-        flex-direction: column;
-        padding-bottom: 1rem;
-    }
-
-    .book-card,
-    .book-card-wish {
-        width: 8rem;
-        height: 13rem;
-    }
-
-    .book-card h3,
-    .book-card-wish h3 {
-        margin-top: 0;
-    }
-}
-
-@media screen and (max-width: 425px) {
-
-    .books {
-        align-items: stretch;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .header {
-        margin-bottom: 3rem;
-    }
-
-    .login-wrapper,
-    .register-wrapper {
-        min-width: 300px;
-        max-width: 300px;
-    }
-
-    .container {
-        padding: 0 1rem;
-    }
-
-    .book-card,
-    .book-card-wish {
-        width: 7rem;
-        height: 11rem;
-    }
-} */
 
 .logout {
     cursor: pointer;
