@@ -2,7 +2,7 @@ import './Button.css'
 
 type ButtonProps = {
     text?: string;
-    type?: string; // soon union
+    type?: string;
     onClick?: () => void;
     isDisabled?: boolean;
     className?: string;

@@ -7,6 +7,10 @@
     padding: 0 2rem;
 }
 
+.header-logo {
+    width: 25px;
+}
+
 .header nav {
     display: flex;
     flex-wrap: wrap;
@@ -15,6 +19,11 @@
 
 .mobile-logout {
     display: none;
+}
+
+.header-wrapper {
+    display: flex;
+    gap: 0.5rem;
 }
 
 @media only screen and (max-width: 768px) {

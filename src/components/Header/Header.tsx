@@ -36,8 +36,11 @@ export const Header = () => {
 
     return (
         <header className="header">
-            <Link className="header-mobile-wrapper" to={`/`}>
-                <h3 className="header-title">bookbloom</h3>
+            <Link className="header-mobile-wrapper"  to={`/`}>
+                <div className="header-wrapper">
+                    <img className="header-logo" src='/public/closed-book.svg' alt='bookbloom' />
+                    <h3 className="header-title">bookbloom</h3>
+                </div>
                 <span className="mobile-logout" onClick={logout}>Log out</span>
             </Link>
             <>

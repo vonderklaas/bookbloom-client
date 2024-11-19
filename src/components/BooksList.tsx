@@ -30,7 +30,6 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
         return null;
     }
 
-    // Sort books by created_date in descending order
     const sortedBooks = [...books].sort((a, b) => {
         const dateA = new Date(a.created_at || 0);
         const dateB = new Date(b.created_at || 0);
