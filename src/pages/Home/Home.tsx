@@ -11,7 +11,7 @@ export const Home = () => {
         <div className="home">
             {!user?.id && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 6, duration: 0.5 }}>
-                    <img className="greetings-arrow" src='/asets/arrow.png' alt='Arrow' />
+                    <img className="greetings-arrow" src='/arrow.png' alt='Arrow' />
                 </motion.div>
             )}
             <motion.div initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>

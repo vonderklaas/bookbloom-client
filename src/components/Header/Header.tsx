@@ -38,7 +38,7 @@ export const Header = () => {
         <header className="header">
             <Link className="header-mobile-wrapper"  to={`/`}>
                 <div className="header-wrapper">
-                    <img className="header-logo" src='/asets/closed-book.svg' alt='bookbloom' />
+                    <img className="header-logo" src='/closed-book.svg' alt='bookbloom' />
                     <h3 className="header-title">bookbloom</h3>
                 </div>
                 <span className="mobile-logout" onClick={logout}>Log out</span>
