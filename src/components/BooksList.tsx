@@ -82,7 +82,7 @@ export const BooksList = ({ books, isProcessing, openModal, setIsAddMode, select
                             </div>
                         ) : (
                             <div className="no-books-wrapper">
-                                <img className="book-add-pointer" src="/public/arrow.png" alt="Add Book" />
+                                <img className="book-add-pointer" src="/asets/arrow.png" alt="Add Book" />
                             </div>
                         )}
                     </div>
