@@ -149,8 +149,8 @@ export const Recommendations: React.FC = () => {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <br />
                     <br />
-                    <Tip marginLeft text="Our AI model analyzes your collection and wishlist to recommend books you'll enjoy." />
-                    <Tip marginLeft text='Add at least 3 books to get personalized suggestions.' />
+                    <Tip text="Our AI model analyzes your collection and wishlist to recommend books you'll enjoy." />
+                    <Tip text='Add at least 3 books to get personalized suggestions.' />
                 </motion.div>
             )}
 

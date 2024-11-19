@@ -1,6 +1,6 @@
 type TipProps = {
     text: string;
-    marginLeft: boolean;
+    marginLeft?: boolean;
 }
 
 export const Tip = ({ text, marginLeft }: TipProps) => {
